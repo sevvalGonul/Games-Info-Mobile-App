@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/gamesFragment"
+          android:title="Games"
+          android:icon="@drawable/vector"/>
+
+    <item android:id="@+id/favouritesFragment"
+          android:title="Favorites"
+          android:icon="@drawable/_con"/>
+</menu>
