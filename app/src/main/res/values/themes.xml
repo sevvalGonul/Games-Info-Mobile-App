@@ -42,11 +42,12 @@
     </style>
 
 
-    <style name="no_game_has">
+    <style name="text_style_1">
 
         <item name="android:textSize">
             18sp
         </item>
+
 
         <item name="android:letterSpacing">
             0.02

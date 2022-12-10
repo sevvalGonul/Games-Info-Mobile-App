@@ -15,7 +15,7 @@
 
         <path
             android:pathData="M0 0V140H375V0"
-            android:fillColor="@color/games_back_gr"
+            android:fillColor="@color/back_gr"
 
             />
 
