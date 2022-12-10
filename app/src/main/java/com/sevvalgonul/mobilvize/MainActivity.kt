@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigationView.setupWithNavController(navController)
 
+        print("Şevval")
+
         print("Nilay")
+
     }
 }
