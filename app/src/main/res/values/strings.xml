@@ -21,6 +21,9 @@ There is no favourites found.
 </string>
     <string name="visit_reddit">Visit Reddit</string>
     <string name="visit_website">Visit Website</string>
+    <string name="meta_critic_str">
 
+metacritic:
+</string>
 
 </resources>
