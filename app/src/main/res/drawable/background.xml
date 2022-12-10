@@ -4,7 +4,8 @@
     android:width="375dp"
     android:height="140dp"
     android:viewportWidth="375"
-    android:viewportHeight="140">
+    android:viewportHeight="140"
+    >
 
     <group>
 
@@ -14,7 +15,8 @@
 
         <path
             android:pathData="M0 0V140H375V0"
-            android:fillColor="#F8F8F8"
+            android:fillColor="@color/back_gr"
+
             />
 
     </group>
