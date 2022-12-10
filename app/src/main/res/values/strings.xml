@@ -19,11 +19,26 @@ No game has been searched.
 
 There is no favourites found.
 </string>
+
+
     <string name="visit_reddit">Visit Reddit</string>
     <string name="visit_website">Visit Website</string>
     <string name="meta_critic_str">
 
 metacritic:
 </string>
+
+    <string name="rate">
+
+100
+</string>
+
+    <string name="game_type_detail_str">
+
+Action,Shooter
+</string>
+
+
+
 
 </resources>
