@@ -90,7 +90,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="69dp"
-        android:gravity="top"
+        android:gravity="center"
         android:lineSpacingExtra="20sp"
         android:text="@string/no_game_has"
         android:textAppearance="@style/text_style_1"

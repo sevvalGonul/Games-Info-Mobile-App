@@ -45,6 +45,40 @@ class GamesFragment : Fragment() {
         val adapter = Rv_adapter(gameList)
         binding.recyclerView.adapter = adapter
 
+<<<<<<< Updated upstream
+=======
+        binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
+
+    }
+
+    private fun filterList(query : String?) {
+        if(query != null) {
+            val filteredList = ArrayList<Game>()
+            for(item in gameList) {
+                if(item.name.toLowerCase(Locale.ROOT).contains(query)) {
+                    filteredList.add(item)
+                }
+            }
+
+            if(filteredList.isEmpty()) {
+
+                adapter.setFilteredList(filteredList)
+                binding.noGameHas.setText("This game doesn't exist")
+            }
+            else {
+                adapter.setFilteredList(filteredList)
+            }
+        }
+>>>>>>> Stashed changes
     }
 
 

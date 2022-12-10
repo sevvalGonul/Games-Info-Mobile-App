@@ -1,5 +1,6 @@
 package com.sevvalgonul.mobilvize
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,15 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
         holder.metacritic.text = currentItem.rate.toString()
+<<<<<<< Updated upstream
+=======
+        holder.genre.text = currentItem.genre
+
+        holder.itemView.setOnClickListener{
+            holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+
+        }
+>>>>>>> Stashed changes
     }
 
     override fun getItemCount(): Int {
