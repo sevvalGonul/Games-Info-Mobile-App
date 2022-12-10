@@ -15,6 +15,7 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         val image : ImageView = itemView.findViewById(R.id.game_png)
         val gameName : TextView = itemView.findViewById(R.id.game_name)
         val metacritic : TextView = itemView.findViewById(R.id.meta_critic)
+        val genre : TextView = itemView.findViewById(R.id.game_detail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -29,7 +30,8 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         val currentItem = gameList[position]
         holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
-        holder.metacritic.text = "Metablabla " + currentItem.rate.toString()
+        holder.metacritic.text = currentItem.rate.toString()
+        holder.genre.text = currentItem.genre
     }
 
     override fun getItemCount(): Int {
