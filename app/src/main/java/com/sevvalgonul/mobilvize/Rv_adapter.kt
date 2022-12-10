@@ -29,10 +29,15 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         val currentItem = gameList[position]
         holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
-        holder.metacritic.text = currentItem.rate.toString()
+        holder.metacritic.text = "Metablabla " + currentItem.rate.toString()
     }
 
     override fun getItemCount(): Int {
         return gameList.size
+    }
+
+    fun setFilteredList(filteredList : ArrayList<Game>) {
+        this.gameList = filteredList
+        notifyDataSetChanged()
     }
 }
