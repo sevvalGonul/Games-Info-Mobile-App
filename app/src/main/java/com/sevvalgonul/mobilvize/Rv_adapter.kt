@@ -16,6 +16,7 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         val image : ImageView = itemView.findViewById(R.id.game_png)
         val gameName : TextView = itemView.findViewById(R.id.game_name)
         val metacritic : TextView = itemView.findViewById(R.id.meta_critic)
+        val genre : TextView = itemView.findViewById(R.id.game_detail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -31,18 +32,20 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
         holder.metacritic.text = currentItem.rate.toString()
-<<<<<<< Updated upstream
-=======
         holder.genre.text = currentItem.genre
 
         holder.itemView.setOnClickListener{
             holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
 
         }
->>>>>>> Stashed changes
-    }
+
 
     override fun getItemCount(): Int {
         return gameList.size
+    }
+
+    fun setFilteredList(filteredList : ArrayList<Game>) {
+        this.gameList = filteredList
+        notifyDataSetChanged()
     }
 }
