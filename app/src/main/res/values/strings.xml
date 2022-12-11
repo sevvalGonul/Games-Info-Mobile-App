@@ -27,7 +27,7 @@ There is no favourites found.
 
 metacritic:
 </string>
-    <string name="grand_teft_auto_v">Grand Teft Auto V</string>
+    <string name="grand_teft_auto_v">Grand Theft Auto V</string>
     <string name="game_description">Game Description</string>
     <string name="grand_text">
         Rockstar Games went bigger, since their previous
@@ -61,6 +61,8 @@ Action,Shooter
 Favourite
 </string>
 
-
+    <string name="games">
+Games
+</string>
 
 </resources>
