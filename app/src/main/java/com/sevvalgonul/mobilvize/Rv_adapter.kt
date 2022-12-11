@@ -3,7 +3,7 @@ package com.sevvalgonul.mobilvize
 
 import android.graphics.Color
 import android.os.Bundle
-import android.graphics.Color
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
