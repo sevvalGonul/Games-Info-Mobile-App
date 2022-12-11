@@ -52,7 +52,6 @@ class DetailsFragment : Fragment() {
         }
 
 
-
         /*
         if ( Game item class . isFavourite == false){
 
@@ -75,6 +74,11 @@ class DetailsFragment : Fragment() {
         }
 
 
+        binding.gamePgButton.setOnClickListener{
+
+
+
+        }
 
     }
 
