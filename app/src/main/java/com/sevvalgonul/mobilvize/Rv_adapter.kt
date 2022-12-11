@@ -38,10 +38,22 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         holder.genre.text = currentItem.genre
 
         holder.itemView.setOnClickListener {
+<<<<<<< Updated upstream
             holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
             // Details Fragment'a geçiyor ama seçilen objeyi yollamıyor:
             val navController = Navigation.findNavController(it)
             navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment)
+=======
+
+            
+            val navController = Navigation.findNavController(it)
+            val bundle = Bundle()
+            bundle.putParcelable("currentGame", currentItem)
+            navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+
+            holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+
+>>>>>>> Stashed changes
 
         }
     }

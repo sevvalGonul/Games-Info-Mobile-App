@@ -32,11 +32,27 @@ class DetailsFragment : Fragment() {
 
         binding.fav.setOnClickListener{
 
+
+            if ( binding.fav.text.equals("Favourite") ){
+
+            binding.fav.setText("Favourited")
+
+        }
+            else{
+
+            binding.fav.setText("Favourite")
+
+
+        }
+
+
+
         /*
         if ( Game item class . isFavourite == false){
 
             binding.fav.setText("Favourited")
             Game item class.isFavorite.set(true)
+
 
         }
         else{
@@ -47,7 +63,7 @@ class DetailsFragment : Fragment() {
         }
 
          */
-            binding.fav.setText("Favourited")
+
 
 
         }
