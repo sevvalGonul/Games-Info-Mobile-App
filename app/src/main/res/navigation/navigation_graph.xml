@@ -18,7 +18,11 @@
         android:id="@+id/favouritesFragment"
         android:name="com.sevvalgonul.mobilvize.FavouritesFragment"
         android:label="fragment_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites" >
+        <argument
+            android:name="gameList"
+            app:argType="com.sevvalgonul.mobilvize.Games" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.sevvalgonul.mobilvize.DetailsFragment"
