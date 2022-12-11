@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
     >
@@ -39,11 +38,10 @@
             android:layout_width="196dp"
             android:layout_height="49dp"
             android:layout_margin="5dp"
-            android:padding="4dp"
+            android:padding="0dp"
             android:text="@string/app_name"
             android:textAlignment="textStart"
             android:textAppearance="@style/title"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.7"
@@ -54,23 +52,59 @@
 
         <TextView
             android:id="@+id/meta_critic"
-            android:layout_width="125dp"
-            android:layout_height="20dp"
-            android:text="@string/meta_critic_str"
-            android:textAlignment="textEnd"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_width="46dp"
+            android:layout_height="26dp"
+
+
+            android:layout_marginStart="-30dp"
+
+            android:text="@string/rate"
+            android:textAppearance="@style/text_style_3"
+
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toEndOf="@+id/game_png"
-
+            app:layout_constraintHorizontal_bias="0.645"
+            app:layout_constraintStart_toStartOf="@+id/game_png"
             app:layout_constraintTop_toBottomOf="@+id/game_name"
+            app:layout_constraintVertical_bias="0.2" />
 
-            app:layout_constraintVertical_bias="0.41"
-            tools:ignore="RtlCompat" />
+        <TextView
+            android:id="@+id/metatric"
+            android:layout_width="81dp"
+            android:layout_height="21dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="-30dp"
+            android:padding="0dp"
+            android:text="@string/meta_critic_str"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/text_style_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@id/meta_critic"
+
+            app:layout_constraintHorizontal_bias="0.34"
+            app:layout_constraintStart_toEndOf="@id/game_png"
+            app:layout_constraintTop_toBottomOf="@id/game_name"
+            app:layout_constraintVertical_bias="0.148" />
+
+        <TextView
+            android:id="@+id/game_detail"
+            android:layout_width="110dp"
+            android:layout_height="24dp"
+
+            android:text="@string/game_type_detail_str"
+            android:textAlignment="textStart"
+
+            android:textAppearance="@style/genre"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            app:layout_constraintHorizontal_bias="0.094"
+            app:layout_constraintStart_toEndOf="@id/game_png"
+            app:layout_constraintTop_toBottomOf="@id/metatric"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
