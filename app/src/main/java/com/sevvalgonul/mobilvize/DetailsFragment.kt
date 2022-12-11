@@ -1,7 +1,7 @@
 package com.sevvalgonul.mobilvize
 
+import android.content.Intent
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
+import android.net.Uri
 
 
 class DetailsFragment : Fragment() {
@@ -51,27 +52,16 @@ class DetailsFragment : Fragment() {
 
 
         }
-
-
         /*
         if ( Game item class . isFavourite == false){
-
             binding.fav.setText("Favourited")
             Game item class.isFavorite.set(true)
-
-
         }
         else{
-
             binding.fav.setText("Favourite")
             Game item class.isFavorite.set(false)
-
         }
-
          */
-
-
-
         }
 
 
@@ -83,10 +73,22 @@ class DetailsFragment : Fragment() {
 
             Navigation.findNavController(it).navigate(action)
 
-
-
         }
 
+
+        binding.button.setOnClickListener{
+
+            val url = "https://www.reddit.com/r/GrandTheftAutoV/"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        }
+        binding.button2.setOnClickListener{
+            val url = "https://www.rockstargames.com/gta-v"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        }
     }
 
 
