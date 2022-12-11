@@ -32,6 +32,9 @@ class DetailsFragment : Fragment() {
         binding.imageView.setImageResource(args.currentGame.image)
         binding.text.text = args.currentGame.name
 
+        binding.buttonReadMore.setOnClickListener{
+            binding.textView.maxLines+=4
+        }
 
         binding.fav.setOnClickListener{
 
