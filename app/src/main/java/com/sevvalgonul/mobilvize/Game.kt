@@ -1,3 +1,8 @@
 package com.sevvalgonul.mobilvize
 
-data class Game(var image: Int, var name: String, var rate: Int, var genre: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Game(var image: Int, var name: String, var rate: Int, var genre: String) : Parcelable
+
