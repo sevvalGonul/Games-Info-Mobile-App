@@ -4,6 +4,9 @@ package com.sevvalgonul.mobilvize
 =======
 import android.graphics.Color
 import android.os.Bundle
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import android.view.LayoutInflater
 import android.view.View

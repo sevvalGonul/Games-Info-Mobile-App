@@ -60,5 +60,24 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+<<<<<<< Updated upstream
+=======
+        //gameList = arrayListOf<Game>()
+
+        //game liste game itemlerini al
+
+        /*
+        for(item in gameList){
+
+            if(item.sFavourite == true){
+                    print( game card view)
+            }
+
+
+        }
+
+        */
+
+>>>>>>> Stashed changes
     }
 }
