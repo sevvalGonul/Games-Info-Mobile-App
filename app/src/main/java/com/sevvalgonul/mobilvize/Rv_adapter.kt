@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class Rv_adapter(private var gameList : ArrayList<Game>) :
     RecyclerView.Adapter<Rv_adapter.GameViewHolder>() {
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // initializing our values
-        val image: ImageView = itemView.findViewById(R.id.game_png)
-        val gameName: TextView = itemView.findViewById(R.id.game_name)
-        val metacritic: TextView = itemView.findViewById(R.id.meta_critic)
-        val genre: TextView = itemView.findViewById(R.id.game_detail)
+    // initializing our values
+        val image : ImageView = itemView.findViewById(R.id.game_png)
+        val gameName : TextView = itemView.findViewById(R.id.game_name)
+        val metacritic : TextView = itemView.findViewById(R.id.meta_critic)
+        val genre : TextView = itemView.findViewById(R.id.game_detail)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -36,9 +39,13 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
 
         holder.itemView.setOnClickListener {
             holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+            // Details Fragment'a geçiyor ama seçilen objeyi yollamıyor:
+            val navController = Navigation.findNavController(it)
+            navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment)
 
         }
     }
+
 
         override fun getItemCount(): Int {
             return gameList.size

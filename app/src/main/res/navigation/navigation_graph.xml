@@ -9,7 +9,11 @@
         android:id="@+id/gamesFragment"
         android:name="com.sevvalgonul.mobilvize.GamesFragment"
         android:label="fragment_games"
-        tools:layout="@layout/fragment_games" />
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.sevvalgonul.mobilvize.FavouritesFragment"
@@ -19,5 +23,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.sevvalgonul.mobilvize.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="currentGame"
+            app:argType="com.sevvalgonul.mobilvize.Game" />
+    </fragment>
 </navigation>
