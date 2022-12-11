@@ -60,7 +60,7 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gameList = arrayListOf<Game>()
+
 
         //game liste game itemlerini al
 
@@ -75,6 +75,7 @@ class FavouritesFragment : Fragment() {
         }
 
         */
+
 
     }
 }

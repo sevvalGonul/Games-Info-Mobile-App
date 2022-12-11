@@ -12,6 +12,7 @@ import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
     private lateinit var binding : FragmentDetailsBinding
+    private val args by navArgs<DetailsFragmentArgs>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,12 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.imageView.setImageResource(args.currentGame.image)
+        binding.text.text = args.currentGame.name
 
+        binding.buttonReadMore.setOnClickListener{
+            binding.textView.maxLines+=4
+        }
 
         binding.fav.setOnClickListener{
 
