@@ -29,6 +29,31 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.fav.setOnClickListener{
+
+        /*
+        if ( Game item class . isFavourite == false){
+
+            binding.fav.setText("Favourited")
+            Game item class.isFavorite.set(true)
+
+        }
+        else{
+
+            binding.fav.setText("Favourite")
+            Game item class.isFavorite.set(false)
+
+        }
+
+         */
+            binding.fav.setText("Favourited")
+
+
+        }
+
+
+
     }
 
 
