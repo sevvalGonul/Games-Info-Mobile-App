@@ -1,5 +1,10 @@
 package com.sevvalgonul.mobilvize
 
+<<<<<<< Updated upstream
+=======
+import android.graphics.Color
+import android.os.Bundle
+>>>>>>> Stashed changes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,11 +52,16 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
 <<<<<<< Updated upstream
 =======
 
+
         holder.itemView.setOnClickListener {
             holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
             // Details Fragment'a geçiyor ama seçilen objeyi yollamıyor:
             val navController = Navigation.findNavController(it)
-            navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment)
+            val bundle = Bundle()
+            bundle.putParcelable("currentGame", currentItem)
+            navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+
+
 
         }
 >>>>>>> Stashed changes
