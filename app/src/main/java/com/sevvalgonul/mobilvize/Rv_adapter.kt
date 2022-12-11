@@ -42,12 +42,16 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
 
 
         holder.itemView.setOnClickListener {
-            holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+
             
             val navController = Navigation.findNavController(it)
+
             val bundle = Bundle()
             bundle.putParcelable("currentGame", currentItem)
             navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+
+
+            holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
 
 
 
