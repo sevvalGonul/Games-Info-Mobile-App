@@ -9,17 +9,15 @@
 
     <View
         android:id="@+id/background"
-        android:layout_width="415dp"
+        android:layout_width="0dp"
         android:layout_height="134dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/background"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
 
@@ -32,14 +30,16 @@
         android:layout_marginTop="90dp"
         android:layout_marginEnd="193dp"
         android:layout_marginBottom="9dp"
+        android:gravity="start"
         android:text="Favourites"
         android:textAppearance="@style/title"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.004" />
 
     <TextView
         android:id="@+id/no_fav_has"
