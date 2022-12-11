@@ -31,5 +31,8 @@
         <argument
             android:name="currentGame"
             app:argType="com.sevvalgonul.mobilvize.Game" />
+        <action
+            android:id="@+id/action_detailsFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment" />
     </fragment>
 </navigation>
