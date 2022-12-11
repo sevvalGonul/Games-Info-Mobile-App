@@ -57,6 +57,9 @@ metacritic:
 Action,Shooter
 </string>
 
+    <string name="favo">
+Favourite
+</string>
 
 
 
