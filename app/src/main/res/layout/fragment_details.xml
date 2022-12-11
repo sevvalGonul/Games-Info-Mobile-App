@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fav"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/img" />
+        app:srcCompat="@drawable/a" />
 
     <View
         android:id="@+id/white_to_black_grad"
