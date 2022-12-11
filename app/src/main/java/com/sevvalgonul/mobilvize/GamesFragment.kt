@@ -50,6 +50,8 @@ class GamesFragment : Fragment() {
         adapter = Rv_adapter(gameList)
         binding.recyclerView.adapter = adapter
 
+
+
         binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -73,12 +75,15 @@ class GamesFragment : Fragment() {
             }
 
             if(filteredList.isEmpty()) {
-                Toast.makeText(context,"No data found", Toast.LENGTH_LONG).show()
+                adapter.setFilteredList(filteredList)
+                binding.noGameHas.setText("This game doesn't exist")
+
             }
             else {
                 adapter.setFilteredList(filteredList)
             }
         }
+
     }
 
 

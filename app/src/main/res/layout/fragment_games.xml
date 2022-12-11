@@ -26,7 +26,7 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/description_title"
         android:layout_width="144dp"
         android:layout_height="47dp"
         android:layout_alignParentStart="true"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
@@ -63,8 +63,8 @@
 
     <android.widget.SearchView
         android:id="@+id/search_field"
-        android:layout_width="380dp"
-        android:layout_height="39dp"
+        android:layout_width="326dp"
+        android:layout_height="42dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
@@ -74,10 +74,10 @@
         android:queryHint="Search for the games"
         app:layout_constraintBottom_toTopOf="@+id/no_game_has"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.0" >
+        app:layout_constraintTop_toBottomOf="@+id/description_title"
+        app:layout_constraintVertical_bias="0.0">
 
     </android.widget.SearchView>
 
@@ -90,7 +90,7 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="69dp"
-        android:gravity="top"
+        android:gravity="center"
         android:lineSpacingExtra="20sp"
         android:text="@string/no_game_has"
         android:textAppearance="@style/text_style_1"

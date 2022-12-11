@@ -19,11 +19,48 @@ No game has been searched.
 
 There is no favourites found.
 </string>
+
+
     <string name="visit_reddit">Visit Reddit</string>
     <string name="visit_website">Visit Website</string>
     <string name="meta_critic_str">
 
 metacritic:
 </string>
+    <string name="grand_teft_auto_v">Grand Teft Auto V</string>
+    <string name="game_description">Game Description</string>
+    <string name="grand_text">
+        Rockstar Games went bigger, since their previous
+        installment of the series. You get the complicated and realistic world-building
+        from Liberty City of GTA4 in the setting of lively and diverse Los Santos,from
+        an old fan favorite GTA San Andreas. 561 different vehicles (including every
+        transport you can operate)....
+                Rockstar Games went bigger, since their previous
+        installment of the series. You get the complicated and realistic world-building
+        from Liberty City of GTA4 in the setting of lively and diverse Los Santos,from
+        an old fan favorite GTA San Andreas. 561 different vehicles (including every
+        transport you can operate)....
+        Rockstar Games went bigger, since their previous
+        installment of the series. You get the complicated and realistic world-building
+        from Liberty City of GTA4 in the setting of lively and diverse Los Santos,from
+        an old fan favorite GTA San Andreas. 561 different vehicles (including every
+        transport you can operate)....
+    </string>
+
+    <string name="rate">
+
+100
+</string>
+
+    <string name="game_type_detail_str">
+
+Action,Shooter
+</string>
+
+    <string name="favo">
+Favourite
+</string>
+
+
 
 </resources>
