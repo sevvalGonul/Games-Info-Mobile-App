@@ -45,7 +45,7 @@ class FavouritesFragment : Fragment() {
         gameList.add(game3)
         gameList.add(game4)
 
-        myAdapter = Rv_adapter(gameList)
+        myAdapter = Rv_adapter(gameList, false)
         val recyclerView = binding.favRecyclerView
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)

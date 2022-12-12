@@ -47,7 +47,7 @@ class GamesFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.setHasFixedSize(true)  // BU NEE
-        adapter = Rv_adapter(gameList)
+        adapter = Rv_adapter(gameList, true)
         binding.recyclerView.adapter = adapter
 
 
