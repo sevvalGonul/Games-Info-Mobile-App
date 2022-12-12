@@ -14,7 +14,7 @@ import com.sevvalgonul.mobilvize.databinding.FragmentFavouritesBinding
 
 class FavouritesFragment : Fragment() {
     private lateinit var binding: FragmentFavouritesBinding
-    private lateinit var gameList : ArrayList<Game>  // bu favlist olmalı
+    private lateinit var favList : ArrayList<Game>
     private lateinit var myAdapter : Rv_adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,26 +34,25 @@ class FavouritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         // favlist olmalı:
-        gameList = arrayListOf<Game>()
+        // Görünümleri test etmek için favori listesi statik olarak oluşturuldu. Finalde gerçeği yansıtacaktır.
+        favList = arrayListOf<Game>()
         var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")
         var game2 = Game(R.drawable.b,"Portal 2", 95, "Action, puzzle")
         var game3 = Game(R.drawable.c,"The Witcher 3: Wild Hunt", 89, "Action, puzzle")
         var game4 = Game(R.drawable.d,"Left 4 Dead 2", 89, "Action, puzzle")
-        gameList.add(game1)
-        gameList.add(game2)
-        gameList.add(game3)
-        gameList.add(game4)
+        favList.add(game1)
+        favList.add(game2)
+        favList.add(game3)
+        favList.add(game4)
 
-        myAdapter = Rv_adapter(gameList, false)
+        myAdapter = Rv_adapter(favList, false)
         val recyclerView = binding.favRecyclerView
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = myAdapter
         }
 
-
-        if(!(gameList.isEmpty()))  // update needed?
+        if(!(favList.isEmpty()))
             binding.noFavHas.visibility = View.INVISIBLE
 
 
@@ -75,23 +74,6 @@ class FavouritesFragment : Fragment() {
         val swap = ItemTouchHelper(itemSwipe)
         swap.attachToRecyclerView(recyclerView)
 
-
-
-
-        //game liste game itemlerini al
-
-        /*
-        for(item in gameList){
-
-            if(item.sFavourite == true){
-                    print( game card view)
-            }
-
-        }
-
-        */
-
-
     }
 
     private fun showDialog(viewHolder: RecyclerView.ViewHolder) {
@@ -100,7 +82,7 @@ class FavouritesFragment : Fragment() {
         builder.setMessage("Are you sure you want to delete item?")
         builder.setPositiveButton("YES") { dialog, which ->
             val position = viewHolder.adapterPosition
-            gameList.removeAt(position)
+            favList.removeAt(position)
             myAdapter.notifyItemRemoved(position)
 
         }

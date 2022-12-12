@@ -21,15 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.detailsFragment) {
-
                 binding.bottomNavigationView.visibility = View.GONE
             } else {
-
                 binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
-
-
 
     }
 }
