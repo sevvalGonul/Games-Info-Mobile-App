@@ -35,13 +35,13 @@
 
         <TextView
             android:id="@+id/game_name"
-            android:layout_width="196dp"
+            android:layout_width="207dp"
             android:layout_height="49dp"
             android:layout_margin="5dp"
             android:padding="0dp"
             android:text="@string/app_name"
             android:textAlignment="textStart"
-            android:textAppearance="@style/title"
+            android:textAppearance="@style/title2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.7"

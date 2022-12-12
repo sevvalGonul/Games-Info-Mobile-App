@@ -17,6 +17,10 @@
 
         <!--on below line we are creating
              a simple image view-->
+
+        <!--on below line we are creating
+             a simple text view-->
+
         <ImageView
             android:id="@+id/game_png"
             android:layout_width="120dp"
@@ -28,45 +32,41 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/game_name"
+            app:layout_constraintHorizontal_bias="0.216"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--on below line we are creating
-             a simple text view-->
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.875" />
 
         <TextView
             android:id="@+id/game_name"
-            android:layout_width="196dp"
+            android:layout_width="400dp"
             android:layout_height="49dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:padding="0dp"
             android:text="@string/app_name"
-            android:textAlignment="textStart"
             android:textAppearance="@style/title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.325"
+            app:layout_constraintHorizontal_bias="0.374"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.241"
+            app:layout_constraintVertical_bias="0.183"
             tools:ignore="RtlCompat" />
 
         <TextView
             android:id="@+id/meta_critic"
             android:layout_width="70dp"
             android:layout_height="28dp"
-
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="4dp"
             android:text="@string/rate"
             android:textAppearance="@style/text_style_3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.354"
+            app:layout_constraintHorizontal_bias="0.326"
             app:layout_constraintStart_toStartOf="@+id/game_png"
             app:layout_constraintTop_toBottomOf="@+id/game_name"
-            app:layout_constraintVertical_bias="0.187" />
+            app:layout_constraintVertical_bias="0.194" />
 
         <TextView
             android:id="@+id/metatric"
@@ -75,7 +75,7 @@
             android:layout_marginStart="4dp"
             android:padding="0dp"
             android:text="@string/meta_critic_str"
-            android:textAlignment="textStart"
+            android:layout_alignParentTop="true"
             android:textAppearance="@style/text_style_2"
             app:layout_constraintBottom_toBottomOf="parent"
 
@@ -84,22 +84,22 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/game_png"
             app:layout_constraintTop_toBottomOf="@id/game_name"
-            app:layout_constraintVertical_bias="0.395" />
+            app:layout_constraintVertical_bias="0.382" />
 
         <TextView
             android:id="@+id/game_detail"
             android:layout_width="110dp"
             android:layout_height="24dp"
 
+            android:layout_alignParentTop="true"
             android:text="@string/game_type_detail_str"
-            android:textAlignment="textStart"
 
+            android:textAlignment="textStart"
             android:textAppearance="@style/genre"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
-
-            app:layout_constraintHorizontal_bias="0.087"
+            app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toEndOf="@id/game_png"
             app:layout_constraintTop_toBottomOf="@id/metatric"
             app:layout_constraintVertical_bias="0.0" />
