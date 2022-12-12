@@ -46,10 +46,9 @@ class GamesFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.setHasFixedSize(true)  // BU NEE
+        binding.recyclerView.setHasFixedSize(true)
         adapter = Rv_adapter(gameList, true)
         binding.recyclerView.adapter = adapter
-
 
 
         binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -70,19 +69,14 @@ class GamesFragment : Fragment() {
             val filteredList = ArrayList<Game>()
 
             for(item in gameList) {
-
                 if(item.name.lowercase(Locale.ROOT).contains(query.lowercase()) ) {
-
-
                     filteredList.add(item)
-
                 }
             }
 
             if(filteredList.isEmpty()) {
                 adapter.setFilteredList(filteredList)
                 binding.noGameHas.setText("This game doesn't exist")
-
             }
             else {
                 adapter.setFilteredList(filteredList)
@@ -90,6 +84,5 @@ class GamesFragment : Fragment() {
         }
 
     }
-
 
 }

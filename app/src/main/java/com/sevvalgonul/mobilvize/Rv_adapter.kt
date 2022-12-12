@@ -41,7 +41,7 @@ class Rv_adapter(private var gameList : ArrayList<Game>, private var details : B
         holder.genre.text = currentItem.genre
 
 
-        if(details) {
+        if(details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
             holder.itemView.setOnClickListener {
                 val navController = Navigation.findNavController(it)
                 val bundle = Bundle()
@@ -53,7 +53,6 @@ class Rv_adapter(private var gameList : ArrayList<Game>, private var details : B
 
         }
     }
-
 
         override fun getItemCount(): Int {
             return gameList.size
