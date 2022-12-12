@@ -2,6 +2,7 @@ package com.sevvalgonul.mobilvize
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sevvalgonul.mobilvize.databinding.ActivityMainBinding
@@ -17,6 +18,16 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.detailsFragment) {
+
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
 
 
 
