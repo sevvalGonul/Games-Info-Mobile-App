@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +45,8 @@ class FavouritesFragment : Fragment() {
         favList.add(game2)
         favList.add(game3)
         favList.add(game4)
+
+        binding.secTitle.text = "Favourites (${favList.size})"
 
         myAdapter = Rv_adapter(favList, false)
         val recyclerView = binding.favRecyclerView
@@ -84,6 +87,7 @@ class FavouritesFragment : Fragment() {
             val position = viewHolder.adapterPosition
             favList.removeAt(position)
             myAdapter.notifyItemRemoved(position)
+            setFavCount(binding.secTitle)
 
         }
         builder.setNegativeButton("NO") { dialog, which ->
@@ -93,5 +97,15 @@ class FavouritesFragment : Fragment() {
         }
         builder.setCancelable(false)  // prevent dialog from disappearing when user clicked somewhere else
         builder.show()
+    }
+
+    private fun setFavCount(title : TextView) {
+        if (favList.size == 0){
+            title.setText("Favourites")
+            binding.noFavHas.visibility = View.VISIBLE
+        }else{
+            title.setText("Favourites (${favList.size})")
+
+        }
     }
 }

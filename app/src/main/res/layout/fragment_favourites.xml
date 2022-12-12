@@ -44,18 +44,6 @@
 
 
     <TextView
-        android:id="@+id/favCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="(3)"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/favRecyclerView"
-        app:layout_constraintLeft_toRightOf="@+id/sec_title"
-        app:layout_constraintBaseline_toBaselineOf="@+id/sec_title"/>
-
-    <TextView
         android:id="@+id/no_fav_has"
         android:layout_width="266dp"
         android:layout_height="50dp"
