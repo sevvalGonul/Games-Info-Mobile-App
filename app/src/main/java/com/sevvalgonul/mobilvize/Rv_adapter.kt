@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class Rv_adapter(private var gameList : ArrayList<Game>) :
+class Rv_adapter(private var gameList : ArrayList<Game>, private var details : Boolean) :
     RecyclerView.Adapter<Rv_adapter.GameViewHolder>() {
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,19 +41,15 @@ class Rv_adapter(private var gameList : ArrayList<Game>) :
         holder.genre.text = currentItem.genre
 
 
-        holder.itemView.setOnClickListener {
+        if(details) {
+            holder.itemView.setOnClickListener {
+                val navController = Navigation.findNavController(it)
+                val bundle = Bundle()
+                bundle.putParcelable("currentGame", currentItem)
+                navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
 
-            
-            val navController = Navigation.findNavController(it)
-
-            val bundle = Bundle()
-            bundle.putParcelable("currentGame", currentItem)
-            navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
-
-
-            holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
-
-
+                holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+            }
 
         }
     }
