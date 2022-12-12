@@ -1,5 +1,6 @@
 package com.sevvalgonul.mobilvize
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +15,7 @@ import com.sevvalgonul.mobilvize.databinding.FragmentFavouritesBinding
 class FavouritesFragment : Fragment() {
     private lateinit var binding: FragmentFavouritesBinding
     private lateinit var gameList : ArrayList<Game>  // bu favlist olmalı
-    private lateinit var adapter : Rv_adapter
+    private lateinit var myAdapter : Rv_adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,27 +45,35 @@ class FavouritesFragment : Fragment() {
         gameList.add(game3)
         gameList.add(game4)
 
+        myAdapter = Rv_adapter(gameList)
         val recyclerView = binding.favRecyclerView
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = Rv_adapter(gameList)
+            adapter = myAdapter
         }
 
-        // For swiping and delete items from favourite list:
-        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+
+        if(!(gameList.isEmpty()))  // update needed?
+            binding.noFavHas.visibility = View.INVISIBLE
+
+
+        val itemSwipe = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {  // this method will be called when user swipe an item
-                val position = viewHolder.adapterPosition  // position of the item that should be deleted
-                gameList.removeAt(position)
-                recyclerView.adapter?.notifyItemRemoved(position)
+                showDialog(viewHolder)
             }
 
         }
 
-        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-
-        if(!(gameList.isEmpty()))  // update needed?
-            binding.noFavHas.visibility = View.INVISIBLE
+        val swap = ItemTouchHelper(itemSwipe)
+        swap.attachToRecyclerView(recyclerView)
 
 
 
@@ -83,5 +92,23 @@ class FavouritesFragment : Fragment() {
         */
 
 
+    }
+
+    private fun showDialog(viewHolder: RecyclerView.ViewHolder) {
+        val builder = AlertDialog.Builder(activity, R.style.MyAlertDialogStyle)
+        builder.setTitle("Delete Item")
+        builder.setMessage("Are you sure you want to delete item?")
+        builder.setPositiveButton("YES") { dialog, which ->
+            val position = viewHolder.adapterPosition
+            gameList.removeAt(position)
+            myAdapter.notifyItemRemoved(position)
+
+        }
+        builder.setNegativeButton("NO") { dialog, which ->
+            val position = viewHolder.adapterPosition
+            myAdapter.notifyItemChanged(position)
+
+        }
+        builder.show()
     }
 }
