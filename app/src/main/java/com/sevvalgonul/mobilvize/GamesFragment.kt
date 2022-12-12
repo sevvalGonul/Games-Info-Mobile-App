@@ -18,7 +18,7 @@ class GamesFragment : Fragment() {
     private lateinit var gameList : ArrayList<Game>
     private lateinit var adapter : Rv_adapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+  override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
@@ -68,9 +68,14 @@ class GamesFragment : Fragment() {
     private fun filterList(query : String?) {
         if(query != null) {
             val filteredList = ArrayList<Game>()
+
             for(item in gameList) {
-                if(item.name.toLowerCase(Locale.ROOT).contains(query)) {
+
+                if(item.name.lowercase(Locale.ROOT).contains(query.lowercase()) ) {
+
+
                     filteredList.add(item)
+
                 }
             }
 
