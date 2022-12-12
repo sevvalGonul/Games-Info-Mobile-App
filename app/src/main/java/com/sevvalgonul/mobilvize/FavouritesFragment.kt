@@ -109,6 +109,7 @@ class FavouritesFragment : Fragment() {
             myAdapter.notifyItemChanged(position)
 
         }
+        builder.setCancelable(false)  // prevent dialog from disappearing when user clicked somewhere else
         builder.show()
     }
 }
