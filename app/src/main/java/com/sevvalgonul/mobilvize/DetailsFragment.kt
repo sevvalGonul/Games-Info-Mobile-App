@@ -34,62 +34,39 @@ class DetailsFragment : Fragment() {
         binding.imageView.setImageResource(args.currentGame.image)
         binding.text.text = args.currentGame.name
 
-        binding.buttonReadMore.setOnClickListener{
+        binding.buttonReadMore.setOnClickListener{  //ON CLICK READ MORE BUTTON LOADS 4 MORE LINES EACH TIME
             binding.textView.maxLines+=4
         }
 
-        binding.fav.setOnClickListener{
+        binding.fav.setOnClickListener {   //ON CLICK TO FAVOURITE BUTTON, IT SETS THE TEXT TO FAVOURITED
 
+            if (binding.fav.text.equals("Favourite")) {
+                binding.fav.setText("Favourited")
 
-            if ( binding.fav.text.equals("Favourite") ){
-
-            binding.fav.setText("Favourited")
-
-        }
-            else{
-
-            binding.fav.setText("Favourite")
-
-
-        }
-        /*
-        if ( Game item class . isFavourite == false){
-            binding.fav.setText("Favourited")
-            Game item class.isFavorite.set(true)
-        }
-        else{
-            binding.fav.setText("Favourite")
-            Game item class.isFavorite.set(false)
-        }
-         */
+                if (args.currentGame.isFavourite == false){  //IF NOT ADDED TO FAVS BEFORE ADD TO FAV
+                    args.currentGame.isFavourite = true
+                }
+            } else {
+                binding.fav.setText("Favourite")
+            }
         }
 
-
-        binding.gamePgButton.setOnClickListener{
-
-            //stackback
-
+        binding.gamePgButton.setOnClickListener{  //THE BACK BUTTON ONCLICK: GO TO GAMES FRAGMENT
             val action = DetailsFragmentDirections.actionDetailsFragmentToGamesFragment()
-
             Navigation.findNavController(it).navigate(action)
-
         }
 
-
-        binding.button.setOnClickListener{
-
+        binding.button.setOnClickListener{   //VISIT REDDIT REDIRECTS TO REDDIT WEB PAGE
             val url = "https://www.reddit.com/r/GrandTheftAutoV/"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
         }
-        binding.button2.setOnClickListener{
+        binding.button2.setOnClickListener{  //VISIT WEBSITE REDIRECTS TO WEB PAGE
             val url = "https://www.rockstargames.com/gta-v"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
         }
     }
-
-
 }
