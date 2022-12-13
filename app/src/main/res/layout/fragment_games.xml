@@ -18,7 +18,7 @@
     android:layout_alignParentBottom="true"
     >
 
-
+    <!-- BACKGROUND -->
     <View
         android:id="@+id/background"
         android:layout_width="0dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
+    <!-- GAMES TİTLE -->
     <TextView
         android:id="@+id/description_title"
         android:layout_width="144dp"
@@ -49,7 +49,6 @@
         android:layout_marginEnd="248dp"
         android:layout_marginBottom="9dp"
         android:gravity="start"
-
         android:text="@string/title"
         android:textAppearance="@style/title"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,6 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/background"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!-- BACKGROUND -->
     <View
         android:id="@+id/second_background"
         android:layout_width="0dp"
@@ -73,6 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background" />
 
+    <!-- SEARCH VİEW -->
     <android.widget.SearchView
         android:id="@+id/search_field"
         android:layout_width="0dp"
@@ -93,9 +94,9 @@
         app:layout_constraintStart_toStartOf="@+id/second_background"
         app:layout_constraintTop_toBottomOf="@+id/description_title"
         app:layout_constraintVertical_bias="0.0">
-
     </android.widget.SearchView>
 
+    <!-- NO FAVOURİTES TEXT -->
     <TextView
         android:id="@+id/no_game_has"
         android:layout_width="266dp"
@@ -117,6 +118,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!-- DİVİDER LİNE -->
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -128,6 +130,7 @@
         app:layout_constraintTop_toBottomOf="@+id/second_background"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!-- RECYCLER VİEW -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"

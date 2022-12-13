@@ -19,8 +19,7 @@
         android:layout_height="136dp"
         android:orientation="horizontal">
 
-        <!--on below line we are creating
-             a simple image view-->
+        <!-- GAME PİCTURE -->
         <ImageView
             android:id="@+id/game_png"
             android:layout_width="120dp"
@@ -35,9 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--on below line we are creating
-             a simple text view-->
-
+        <!-- GAMES TİTLE -->
         <TextView
             android:id="@+id/game_name"
             android:layout_width="207dp"
@@ -55,6 +52,7 @@
             app:layout_constraintVertical_bias="0.08"
             tools:ignore="RtlCompat" />
 
+        <!-- GAMES RATE -->
         <TextView
             android:id="@+id/meta_critic"
             android:layout_width="46dp"
@@ -69,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/game_name"
             app:layout_constraintVertical_bias="0.2" />
 
+        <!-- METACRİTİC TEXT -->
         <TextView
             android:id="@+id/metatric"
             android:layout_width="91dp"
@@ -80,32 +79,26 @@
             android:textAlignment="textStart"
             android:textAppearance="@style/text_style_2"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toStartOf="@id/meta_critic"
-
             app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toEndOf="@id/game_png"
             app:layout_constraintTop_toBottomOf="@id/game_name"
             app:layout_constraintVertical_bias="0.13" />
 
+        <!-- GAMES GENRE -->
         <TextView
             android:id="@+id/game_detail"
             android:layout_width="110dp"
             android:layout_height="24dp"
-
             android:text="@string/game_type_detail_str"
             android:textAlignment="textStart"
-
             android:textAppearance="@style/genre"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
-
             app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toEndOf="@id/game_png"
             app:layout_constraintTop_toBottomOf="@id/metatric"
             app:layout_constraintVertical_bias="0.0" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

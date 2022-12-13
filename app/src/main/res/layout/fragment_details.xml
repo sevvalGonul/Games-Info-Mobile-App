@@ -79,7 +79,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias="1.0" />
 
-    <!-- THE NAME OF THE GAME ABOVE THE PICTURE -->
+    <!-- THE NAME OF THE GAME IN PICTURE AT BOTTOM-->
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -90,7 +90,6 @@
         android:text="@string/grand_teft_auto_v"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -153,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <!-- VISIT REDDIT -->
+    <!-- VISIT REDDIT BUTTON-->
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -172,7 +171,7 @@
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp" />
 
-    <!-- VISIT WEBSITE -->
+    <!-- VISIT WEBSITE BUTTON-->
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
