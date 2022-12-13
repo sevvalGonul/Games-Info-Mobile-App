@@ -8,6 +8,10 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+
+    <!--Bu xmlde tıklanınca açılacak oyun detayları-->
+    <!-- fragmentının görüntüleri oluşturuluyor.-->
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
