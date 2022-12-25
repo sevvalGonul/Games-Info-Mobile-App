@@ -15,7 +15,7 @@ interface GamesAPIService {
     @GET("games")
     suspend fun getAllGames(  // Query annotation is for request parameters. They are part of the request
         @Query("key") key: String = API_KEY,
-        @Query("page") page: Int = 1,
+        @Query("page") page: Int = 1,  // That will later be helpfull to paginate our request because we don't get all the games at once(that would be too much data at once)
         @Query("page_size") pageSize: Int = 10
     ) : Response<GamesResponse>  // ??? Sadece GamesResponse da olabilir
 

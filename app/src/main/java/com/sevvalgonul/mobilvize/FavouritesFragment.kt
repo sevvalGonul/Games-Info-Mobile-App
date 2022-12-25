@@ -18,6 +18,8 @@ class FavouritesFragment : Fragment() {
     private lateinit var favList : ArrayList<Game>
     private lateinit var myAdapter : Rv_adapter
 
+    private lateinit var viewModel: GamesViewModel  // ??? private olmamalı mı
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,6 +37,11 @@ class FavouritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (activity as MainActivity).viewModel  // To access view model in main activity
+
+
+
+
         // Görünümleri test etmek için favori listesi statik olarak oluşturuldu. Finalde gerçeği yansıtacaktır.
         favList = arrayListOf<Game>()
         var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")

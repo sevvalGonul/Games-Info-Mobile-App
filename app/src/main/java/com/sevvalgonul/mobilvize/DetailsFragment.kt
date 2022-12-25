@@ -16,6 +16,8 @@ class DetailsFragment : Fragment() {
     private lateinit var binding : FragmentDetailsBinding
     private val args by navArgs<DetailsFragmentArgs>()
 
+    private lateinit var viewModel: GamesViewModel  // ??? DetailsFragment'ta buna ihtiyaç olacak mı
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,10 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (activity as MainActivity).viewModel  // To access view model in main activity
+
+
+
         binding.imageView.setImageResource(args.currentGame.image)
         binding.text.text = args.currentGame.name
 

@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
+// Vizede kullanıldı. Final için GamesAdapter yazılacak ve gerekli göstermeler güncellenebilir.
 class Rv_adapter(private var gameList : ArrayList<Game>, private var details : Boolean) :
     RecyclerView.Adapter<Rv_adapter.GameViewHolder>() {
 
