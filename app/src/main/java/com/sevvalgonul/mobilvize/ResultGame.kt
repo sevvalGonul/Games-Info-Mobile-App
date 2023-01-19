@@ -10,14 +10,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "favourites")  // This class is a table in our database. ResultGame is a table, val's are our columns and each row of table will represent an entry, aka a favgame
 data class ResultGame(  // Each game in the GameResponse, notice that it doesn't contain genres
+    @SerializedName("id")
+    val uid: Int,  // ???
+    val name: String,
     //val added: Int,
     //val added_by_status: AddedByStatus,
     val background_image: String,
     //val esrb_rating: EsrbRating,
-    @SerializedName("id")
-    val uid: Int,  // ???
     val metacritic: Int,
-    val name: String,
     //val platforms: List<Platform>,
     //val playtime: Int,
     //val rating: Int,

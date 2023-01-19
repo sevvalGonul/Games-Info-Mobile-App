@@ -5,5 +5,5 @@ data class GamesResponse(
     val count: Int,
     val next: String,
     val previous: String,
-    val resultGames: List<ResultGame>
+    val results: List<ResultGame>
 )

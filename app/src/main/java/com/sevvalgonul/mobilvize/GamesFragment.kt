@@ -47,7 +47,7 @@ class GamesFragment : Fragment() {
             when(response) {
                 is Resource.Success -> {
                     response.data?.let { gamesResponse ->
-                    gamesAdapter.differ.submitList(gamesResponse.resultGames)
+                    gamesAdapter.differ.submitList(gamesResponse.results)
 
                     }
                 }
