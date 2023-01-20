@@ -10,11 +10,16 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
 import android.net.Uri
+import com.bumptech.glide.Glide
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class DetailsFragment : Fragment() {
     private lateinit var binding : FragmentDetailsBinding
     private val args by navArgs<DetailsFragmentArgs>()
+    private lateinit var details : DetailResponse
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +36,38 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imageView.setImageResource(args.currentGame.image)
-        binding.text.text = args.currentGame.name
+        //binding.imageView.setImageResource(args.currentGame.image)
+        //binding.text.text = args.currentGame.name
+
+        val apiService = GamesApiService.getInstance()
+        var call = apiService.getGamesDetail(args.gameId)
+        call.enqueue(object: Callback<DetailResponse> {
+            override fun onResponse(
+                call: Call<DetailResponse>,
+                response: Response<DetailResponse>
+            ) {
+                if(response.code() == 200) {
+                    details = response.body()!!  // DetailResponse nullable da yapabilirsin?
+                    //print(details)
+                    Glide.with(binding.imageView.context).load(details.background_image).into(binding.imageView)  // load image url into imageView
+                    binding.text.text = details.name  // Game name
+                    binding.textView.text = details.description  // Game description
+                }
+            }
+
+            override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+
+
+
 
         binding.buttonReadMore.setOnClickListener{  //ON CLICK READ MORE BUTTON LOADS 4 MORE LINES EACH TIME
             binding.textView.maxLines+=4
         }
 
-        binding.fav.setOnClickListener {   //ON CLICK TO FAVOURITE BUTTON, IT SETS THE TEXT TO FAVOURITED
+        /*binding.fav.setOnClickListener {   //ON CLICK TO FAVOURITE BUTTON, IT SETS THE TEXT TO FAVOURITED
 
             if (binding.fav.text.equals("Favourite")) {
                 binding.fav.setText("Favourited")
@@ -49,7 +78,7 @@ class DetailsFragment : Fragment() {
             } else {
                 binding.fav.setText("Favourite")
             }
-        }
+        }*/
 
         binding.gamePgButton.setOnClickListener{  //THE BACK BUTTON ONCLICK: GO TO GAMES FRAGMENT
             val action = DetailsFragmentDirections.actionDetailsFragmentToGamesFragment()
@@ -57,16 +86,24 @@ class DetailsFragment : Fragment() {
         }
 
         binding.button.setOnClickListener{   //VISIT REDDIT REDIRECTS TO REDDIT WEB PAGE
-            val url = "https://www.reddit.com/r/GrandTheftAutoV/"
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
+            //val url = "https://www.reddit.com/r/GrandTheftAutoV/"
+            val url = details.reddit_url
+            if(url != null) {  // bu gereksiz mi?
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }
+
         }
         binding.button2.setOnClickListener{  //VISIT WEBSITE REDIRECTS TO WEB PAGE
-            val url = "https://www.rockstargames.com/gta-v"
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
+            //val url = "https://www.rockstargames.com/gta-v"
+            val url = details.website
+            if(url != null) {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+                startActivity(i)
+            }
+
         }
     }
 }

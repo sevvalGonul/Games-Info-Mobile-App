@@ -9,13 +9,16 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevvalgonul.mobilvize.databinding.FragmentGamesBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class GamesFragment : Fragment() {
     private lateinit var binding : FragmentGamesBinding
-    private lateinit var gameList : ArrayList<Game>
+    //private lateinit var gameList : ArrayList<Game>
     private lateinit var adapter : Rv_adapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,25 @@ class GamesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gameList = arrayListOf<Game>()
+
+        val apiService = GamesApiService.getInstance()
+        var call = apiService.getGames()
+        call.enqueue(object: Callback<GamesResponse> {
+            override fun onResponse(call: Call<GamesResponse>, response: Response<GamesResponse>) {
+                if(response.code() == 200) {
+                    var myResponse = response.body()
+                    //print(myResponse)
+                    initRecyclerView(myResponse!!.results)
+                }
+            }
+            override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
+                print("sıçış")
+            }
+        })
+
+
+
+        /*gameList = arrayListOf<Game>()
         var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")
         var game2 = Game(R.drawable.b,"Portal 2", 95, "Action, puzzle")
         var game3 = Game(R.drawable.c,"The Witcher 3: Wild Hunt", 89, "Action, puzzle")
@@ -81,7 +102,14 @@ class GamesFragment : Fragment() {
             else {
                 adapter.setFilteredList(filteredList)
             }
-        }
+        }*/
+
+    }
+
+    fun initRecyclerView(gameList : List<ResultGame>) {
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)  // Context?
+        binding.recyclerView.adapter = Rv_adapter(gameList, true)
 
     }
 

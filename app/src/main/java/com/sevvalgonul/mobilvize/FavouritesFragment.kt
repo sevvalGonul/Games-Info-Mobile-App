@@ -46,7 +46,7 @@ class FavouritesFragment : Fragment() {
         favList.add(game3)
         favList.add(game4)
 
-        binding.secTitle.text = "Favourites (${favList.size})"
+        /*binding.secTitle.text = "Favourites (${favList.size})"
 
         myAdapter = Rv_adapter(favList, false)
         val recyclerView = binding.favRecyclerView
@@ -106,6 +106,6 @@ class FavouritesFragment : Fragment() {
         }else{
             title.setText("Favourites (${favList.size})")
 
-        }
+        }*/
     }
 }

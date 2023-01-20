@@ -29,8 +29,8 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="currentGame"
-            app:argType="com.sevvalgonul.mobilvize.Game" />
+            android:name="gameId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailsFragment_to_gamesFragment"
             app:destination="@id/gamesFragment" />

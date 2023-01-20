@@ -13,8 +13,9 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
-class Rv_adapter(private var gameList : ArrayList<Game>, private var details : Boolean) :
+class Rv_adapter(private var gameList : List<ResultGame>, private var details : Boolean) :
     RecyclerView.Adapter<Rv_adapter.GameViewHolder>() {
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,17 +36,20 @@ class Rv_adapter(private var gameList : ArrayList<Game>, private var details : B
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val currentItem = gameList[position]
-        holder.image.setImageResource(currentItem.image)
+        //holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
-        holder.metacritic.text = currentItem.rate.toString()
-        holder.genre.text = currentItem.genre
+        holder.metacritic.text = currentItem.metacritic.toString()
+        val genreStr = currentItem.genres.map { it.name }
+        holder.genre.text = genreStr.joinToString()
+        Glide.with(holder.image.context).load(currentItem.background_image).into(holder.image)
 
 
         if(details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
             holder.itemView.setOnClickListener {
                 val navController = Navigation.findNavController(it)
                 val bundle = Bundle()
-                bundle.putParcelable("currentGame", currentItem)
+                //bundle.putParcelable("currentGame", currentItem)
+                bundle.putInt("gameId", currentItem.id)
                 navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
 
                 holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
@@ -58,9 +62,9 @@ class Rv_adapter(private var gameList : ArrayList<Game>, private var details : B
             return gameList.size
         }
 
-        fun setFilteredList(filteredList: ArrayList<Game>) {
+        /*fun setFilteredList(filteredList: ArrayList<Game>) {
             this.gameList = filteredList
             notifyDataSetChanged()
-        }
+        }*/
     }
 
