@@ -1,6 +1,7 @@
 package com.sevvalgonul.mobilvize
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
-import android.net.Uri
 import com.bumptech.glide.Glide
+import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +41,7 @@ class DetailsFragment : Fragment() {
 
         val apiService = GamesApiService.getInstance()
         var call = apiService.getGamesDetail(args.gameId)
+        println("args.gameId=$args.gameId")
         call.enqueue(object: Callback<DetailResponse> {
             override fun onResponse(
                 call: Call<DetailResponse>,
@@ -52,6 +53,12 @@ class DetailsFragment : Fragment() {
                     Glide.with(binding.imageView.context).load(details.background_image).into(binding.imageView)  // load image url into imageView
                     binding.text.text = details.name  // Game name
                     binding.textView.text = details.description  // Game description
+                    // Favori dosyasindan okunan deger ile kontrol edilecek.
+
+                    if (FavoriteModel.isFavoritedGames(args.gameId)) {
+                        binding.fav.setText("Favourited")
+                    }
+
                 }
             }
 
@@ -67,20 +74,31 @@ class DetailsFragment : Fragment() {
             binding.textView.maxLines+=4
         }
 
-        /*binding.fav.setOnClickListener {   //ON CLICK TO FAVOURITE BUTTON, IT SETS THE TEXT TO FAVOURITED
+        binding.fav.setOnClickListener {   //ON CLICK TO FAVOURITE BUTTON, IT SETS THE TEXT TO FAVOURITED
 
             if (binding.fav.text.equals("Favourite")) {
                 binding.fav.setText("Favourited")
+/* Burada currentGame.isFavourite degis */
+                println("OyunID= ${args.gameId}")
+                // Dosyaya yazdirma FavoriteModel,e tasinacak.
 
-                if (args.currentGame.isFavourite == false){  //IF NOT ADDED TO FAVS BEFORE ADD TO FAV
+                /*
+                var myFile = FavoriteModel.getFavoritesFile()
+                myFile.appendText(args.gameId.toString()+";")
+
+                 */
+                FavoriteModel.addFavoritedList(args.gameId)
+/*                if (args.currentGame.isFavourite == false){  //IF NOT ADDED TO FAVS BEFORE ADD TO FAV
                     args.currentGame.isFavourite = true
-                }
+                }*/
             } else {
                 binding.fav.setText("Favourite")
+                //DELETE FROM FAVORİTED LİST
+                FavoriteModel.deleteFavoritedList(args.gameId)
             }
-        }*/
+        }
 
-        binding.gamePgButton.setOnClickListener{  //THE BACK BUTTON ONCLICK: GO TO GAMES FRAGMENT
+        binding.gamePgButton.setOnClickListener {  //THE BACK BUTTON ONCLICK: GO TO GAMES FRAGMENT
             val action = DetailsFragmentDirections.actionDetailsFragmentToGamesFragment()
             Navigation.findNavController(it).navigate(action)
         }

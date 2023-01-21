@@ -1,19 +1,15 @@
 package com.sevvalgonul.mobilvize
 
-import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.sevvalgonul.mobilvize.databinding.FragmentDetailsBinding
 import com.sevvalgonul.mobilvize.databinding.FragmentFavouritesBinding
 
 class FavouritesFragment : Fragment() {
+    private lateinit var gameList: List<ResultGame>
     private lateinit var binding: FragmentFavouritesBinding
     private lateinit var favList : ArrayList<Game>
     private lateinit var myAdapter : Rv_adapter
@@ -35,6 +31,8 @@ class FavouritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /*
         // Görünümleri test etmek için favori listesi statik olarak oluşturuldu. Finalde gerçeği yansıtacaktır.
         favList = arrayListOf<Game>()
         var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")
@@ -46,9 +44,16 @@ class FavouritesFragment : Fragment() {
         favList.add(game3)
         favList.add(game4)
 
-        /*binding.secTitle.text = "Favourites (${favList.size})"
+         */
+        println("Favoriler açıldı")
 
-        myAdapter = Rv_adapter(favList, false)
+        initRecyclerView(FavoriteModel.getFavoritedList())
+
+
+        /*
+        binding.secTitle.text = "Favourites (${favList.size})"
+
+        myAdapter = Rv_adapter(gameList, false)
         val recyclerView = binding.favRecyclerView
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -108,4 +113,12 @@ class FavouritesFragment : Fragment() {
 
         }*/
     }
+
+    fun initRecyclerView(gameList : List<ResultGame>) {
+
+        binding.favRecyclerView.layoutManager = LinearLayoutManager(binding.favRecyclerView.context)  // Context?
+        binding.favRecyclerView.adapter = Rv_adapter(gameList, false)
+
+    }
+
 }

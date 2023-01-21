@@ -1,19 +1,15 @@
 package com.sevvalgonul.mobilvize
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevvalgonul.mobilvize.databinding.FragmentGamesBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class GamesFragment : Fragment() {
@@ -21,7 +17,7 @@ class GamesFragment : Fragment() {
     //private lateinit var gameList : ArrayList<Game>
     private lateinit var adapter : Rv_adapter
 
-  override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
@@ -37,19 +33,21 @@ class GamesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        println("gameFragment onViewCreated")
         val apiService = GamesApiService.getInstance()
         var call = apiService.getGames()
+        //aşağıda Liste halinde gamesler alınıyor
         call.enqueue(object: Callback<GamesResponse> {
             override fun onResponse(call: Call<GamesResponse>, response: Response<GamesResponse>) {
                 if(response.code() == 200) {
                     var myResponse = response.body()
                     //print(myResponse)
+                    FavoriteModel.setGameList(myResponse!!.results)
                     initRecyclerView(myResponse!!.results)
                 }
             }
             override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
-                print("sıçış")
+
             }
         })
 
