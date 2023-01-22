@@ -22,6 +22,9 @@
         <argument
             android:name="gameList"
             app:argType="com.sevvalgonul.mobilvize.Games" />
+        <action
+            android:id="@+id/action_favouritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -29,8 +32,8 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="currentGame"
-            app:argType="com.sevvalgonul.mobilvize.Game" />
+            android:name="gameId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailsFragment_to_gamesFragment"
             app:destination="@id/gamesFragment" />

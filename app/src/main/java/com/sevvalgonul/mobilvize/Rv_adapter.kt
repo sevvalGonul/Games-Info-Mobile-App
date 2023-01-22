@@ -3,18 +3,16 @@ package com.sevvalgonul.mobilvize
 
 import android.graphics.Color
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
-class Rv_adapter(private var gameList : ArrayList<Game>, private var details : Boolean) :
+class Rv_adapter(private var gameList : List<ResultGame>, private var details : Boolean) :
     RecyclerView.Adapter<Rv_adapter.GameViewHolder>() {
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,37 +28,49 @@ class Rv_adapter(private var gameList : ArrayList<Game>, private var details : B
             R.layout.game_item,
             parent, false
         )
+
         return GameViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val currentItem = gameList[position]
-        holder.image.setImageResource(currentItem.image)
+        //holder.image.setImageResource(currentItem.image)
         holder.gameName.text = currentItem.name
-        holder.metacritic.text = currentItem.rate.toString()
-        holder.genre.text = currentItem.genre
+        holder.metacritic.text = currentItem.metacritic.toString()
+        val genreStr = currentItem.genres.map { it.name }
+        holder.genre.text = genreStr.joinToString()
+        Glide.with(holder.image.context).load(currentItem.background_image).into(holder.image)
 
 
-        if(details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+        //if (details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+            // Detay Ekrani GamesFragment'ten mi acildi, FavouritesFragment'ten mi Acildi Bilinmesi gerekiyor.
             holder.itemView.setOnClickListener {
                 val navController = Navigation.findNavController(it)
                 val bundle = Bundle()
-                bundle.putParcelable("currentGame", currentItem)
-                navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
-
+                //bundle.putParcelable("currentGame", currentItem)
+                bundle.putInt("gameId", currentItem.id)
+                if (details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+                    navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+                } else {
+                    navController!!.navigate(R.id.action_favouritesFragment_to_detailsFragment, bundle)
+                }
                 holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
             }
 
-        }
+       // }
     }
 
         override fun getItemCount(): Int {
             return gameList.size
         }
 
-        fun setFilteredList(filteredList: ArrayList<Game>) {
-            this.gameList = filteredList
-            notifyDataSetChanged()
-        }
+    fun setTempGameList(tempGameList: List<ResultGame>) {
+        gameList = tempGameList
+    }
+
+    /*fun setFilteredList(filteredList: ArrayList<Game>) {
+        this.gameList = filteredList
+        notifyDataSetChanged()
+    }*/
     }
 

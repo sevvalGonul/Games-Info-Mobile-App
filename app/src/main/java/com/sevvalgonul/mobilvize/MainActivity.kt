@@ -1,8 +1,8 @@
 package com.sevvalgonul.mobilvize
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.sevvalgonul.mobilvize.databinding.ActivityMainBinding
@@ -26,6 +26,28 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
+        println("main.onCreate")
+        // Favori ID Listesini Dosyadan Okuyacak.
+        FavoriteModel.getFavoriIdList()
+    }
+
+    override fun finish() {
+        println("Yazilim finish...")
+        super.finish()
 
     }
+    override fun onDestroy() {
+        println("Yazilim onDestroy...")
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        println("Yazilim onStop...")
+        // Guncel Favori Listesi Dosyaya Yazdirilir.
+        FavoriteModel.writeFavoritedIdListToFile()
+        super.onStop()
+        println("Yazilim super.onStop Sonrasi...")
+    }
+
+
 }
