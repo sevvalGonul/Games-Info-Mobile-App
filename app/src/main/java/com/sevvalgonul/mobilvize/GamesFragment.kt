@@ -10,14 +10,12 @@ import com.sevvalgonul.mobilvize.databinding.FragmentGamesBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class GamesFragment : Fragment() {
     private lateinit var binding : FragmentGamesBinding
     //private lateinit var gameList : ArrayList<Game>
-    //sprivate lateinit var adapter : Rv_adapter
+    private lateinit var adapter : Rv_adapter
     private var isLoading = false
     private var isLastPage = false
     private var tempGameList: ArrayList<ResultGame> = ArrayList()
@@ -27,7 +25,6 @@ class GamesFragment : Fragment() {
     private var currentPage = PAGE_START
     private val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     private lateinit var apiService: GamesApiService
-    lateinit var rvAdapter: Rv_adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +45,7 @@ class GamesFragment : Fragment() {
 
 
         initRecyclerView(tempGameList)
-        apiService = GamesApiService.getInstance()
+        val apiService = GamesApiService.getInstance()
 
 
         /*var call = apiService.getGames()
@@ -68,7 +65,7 @@ class GamesFragment : Fragment() {
         })*/
 
         addScrollListener()
-        initListeners(rvAdapter)
+        initListeners(adapter)
         loadFirstPage()
 
 
@@ -113,8 +110,7 @@ class GamesFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)  // Context?
         binding.recyclerView.setHasFixedSize(true)
-        rvAdapter = Rv_adapter(gameList, true)
-        binding.recyclerView.adapter = rvAdapter
+        binding.recyclerView.adapter = Rv_adapter(gameList, true)
 
     }
 
@@ -125,7 +121,7 @@ class GamesFragment : Fragment() {
                     resultList.addAll(response.body()!!.results.toMutableList())
                     tempGameList.addAll(response.body()!!.results.toMutableList())
                     isLoading = false
-                    rvAdapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
 
                     if (currentPage == TOTAL_PAGES){
                         isLastPage = true
@@ -160,7 +156,7 @@ class GamesFragment : Fragment() {
                 if (response.isSuccessful){
                     resultList.addAll(response.body()!!.results.toMutableList())
                     tempGameList.addAll(response.body()!!.results.toMutableList())
-                    rvAdapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
                 }
             }
 
