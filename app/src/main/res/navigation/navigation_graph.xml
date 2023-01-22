@@ -22,6 +22,9 @@
         <argument
             android:name="gameList"
             app:argType="com.sevvalgonul.mobilvize.Games" />
+        <action
+            android:id="@+id/action_favouritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

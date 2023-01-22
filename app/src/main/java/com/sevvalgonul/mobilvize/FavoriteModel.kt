@@ -6,7 +6,7 @@ import java.util.*
 
 class FavoriteModel {
     companion object {
-        private lateinit var gameList: List<ResultGame>
+        //private lateinit var gameList: List<ResultGame>
         var favList: ArrayList<ResultGame> = arrayListOf<ResultGame>()
         private var myFile : File? = null
         var favGameIdList : ArrayList<Int> = arrayListOf<Int>()
@@ -65,14 +65,14 @@ class FavoriteModel {
                 getFavoriIdList().add(gameId)
             }
         }
-
+/*
         fun setGameList(results: List<ResultGame>) {
             gameList = results
         }
 
         fun getGameList(): List<ResultGame> {
             return gameList
-        }
+        }*/
 
         fun getFavoritedList(): List<ResultGame> {
             //favlistteki id olan oyunları gamelşstte bulup saklayacak
@@ -82,10 +82,11 @@ class FavoriteModel {
 
             favList.clear()
 
-            for (eachGame in gameList) {
+            val tempGameList = GameModel.getTempGameList()
+            for (eachGame in tempGameList) {
 
                 for (eachFavId in favGameIdList){
-                    println("eachGame.id= "+ eachGame.id + "eachFavId=" + eachFavId)
+                    println("eachGame.id= " + eachGame.id + " eachFavId= " + eachFavId)
 
                     if ( eachFavId == eachGame.id ){
                         favList.add(eachGame)
@@ -116,8 +117,10 @@ class FavoriteModel {
         }
 
         fun deleteFavoritedListByIndex(position: Int) {
-            getFavoriIdList().removeAt(position)
-            println("position at ="+ position + " silindi")
+            val favID = favList.get(position).id
+            println("position at ="+ position + " silindi favList.id-name=" + favID + "-" + favList.get(position).name)
+            //getFavoriIdList().removeAt(position)
+            getFavoriIdList().remove(favID)
         }
     }
 }
