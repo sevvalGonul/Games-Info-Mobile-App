@@ -25,14 +25,6 @@ interface GamesApiService {
         @Query("key") key: String = API_KEY,
     ) : Call<DetailResponse>
 
-    @GET("games")
-    fun search(
-        @Query("search") searchedText: String,
-        @Query("key") key: String = API_KEY
-    ) : Call<GamesResponse>
-
-
-
     companion object {
         private var apiService: GamesApiService? = null
         fun getInstance() : GamesApiService {
