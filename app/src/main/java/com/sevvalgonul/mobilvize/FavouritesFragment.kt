@@ -88,7 +88,7 @@ class FavouritesFragment : Fragment() {
         builder.setPositiveButton("YES") { dialog, which ->
             val position = viewHolder.adapterPosition
             FavoriteModel.deleteFavoritedListByIndex(position)
-            println("position = " +position)
+            println("position = " + position)
             initRecyclerView(FavoriteModel.getFavoritedList())
             //DELETE FROM FAV LİST YAPILDI AMA EFEKTİF DEĞİL
             //VE FAVOURİTED YANINDAKİ SAYI GÜNCELLENİYOR

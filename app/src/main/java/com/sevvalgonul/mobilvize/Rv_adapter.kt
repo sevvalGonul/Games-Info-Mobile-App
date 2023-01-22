@@ -64,9 +64,13 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
             return gameList.size
         }
 
-        /*fun setFilteredList(filteredList: ArrayList<Game>) {
-            this.gameList = filteredList
-            notifyDataSetChanged()
-        }*/
+    fun setTempGameList(tempGameList: List<ResultGame>) {
+        gameList = tempGameList
+    }
+
+    /*fun setFilteredList(filteredList: ArrayList<Game>) {
+        this.gameList = filteredList
+        notifyDataSetChanged()
+    }*/
     }
 

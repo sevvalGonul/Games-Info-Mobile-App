@@ -13,13 +13,14 @@ import retrofit2.Response
 
 
 class GamesFragment : Fragment() {
+    private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var apiService: GamesApiService
     private lateinit var binding : FragmentGamesBinding
     private lateinit var rvAdapter : Rv_adapter
     private val PAGE_START = 1
     private val TOTAL_PAGES = 20
     private var currentPage = PAGE_START
-    private val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    //private var linearLayoutManager
     private var isLoading = false
     private var isLastPage = false
 
@@ -42,8 +43,8 @@ class GamesFragment : Fragment() {
         println("gameFragment onViewCreated")
         apiService = GamesApiService.getInstance()
 
-        //initRecyclerView(GameModel.getTempGameList())
-        loadFirstPage()
+        initRecyclerView(GameModel.getTempGameList())
+
 
         /*
         var call = apiService.getGames()
@@ -65,6 +66,7 @@ class GamesFragment : Fragment() {
 */
 
         addScrollListener()
+        loadFirstPage()
         //initListeners(rvAdapter)
 
 
@@ -121,7 +123,9 @@ class GamesFragment : Fragment() {
     }
 
     fun initRecyclerView(gameList : List<ResultGame>) {
-        binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)  // Context?
+        //linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        linearLayoutManager = LinearLayoutManager(binding.recyclerView.context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = linearLayoutManager  // Context?
         binding.recyclerView.setHasFixedSize(true)
         rvAdapter  = Rv_adapter(gameList, true)
         binding.recyclerView.adapter = rvAdapter
@@ -129,18 +133,25 @@ class GamesFragment : Fragment() {
     }
 
     private fun addScrollListener(){
+        println("addScrollListener")
+        //binding.recyclerView.addOnScrollListener(dene1)
+
         binding.recyclerView.addOnScrollListener(object: PaginationScrollListener(linearLayoutManager) {
+
             override fun loadMoreItems() {
                 isLoading = true
                 currentPage += 1
+                println("addScrollListener.loadMoreItems currentPage=" + currentPage)
                 loadNextPage()
             }
 
             override fun isLastPage(): Boolean {
+                println("addScrollListener.isLastPage=" + isLastPage)
                 return isLastPage
             }
 
             override fun isLoading(): Boolean {
+                println("addScrollListener.isLoading=" + isLoading)
                 return isLoading
             }
         })
@@ -154,8 +165,9 @@ class GamesFragment : Fragment() {
                     //tempGameList.addAll(response.body()!!.results.toMutableList())
                     //**GameModel.addGameList(response.body()!!.results)
                     GameModel.setTempGameList(response.body()!!.results)
-                    initRecyclerView(GameModel.getTempGameList())
-                    //rvAdapter.notifyDataSetChanged()
+                    //initRecyclerView(GameModel.getTempGameList())
+                    rvAdapter.setTempGameList(GameModel.getTempGameList())
+                    rvAdapter.notifyDataSetChanged()
                     println("loadFirstPage ")
                 }
             }
@@ -165,24 +177,37 @@ class GamesFragment : Fragment() {
     }
 
     private fun loadNextPage() {
-        apiService.getGames(page = currentPage).enqueue(object: Callback<GamesResponse>{
-            override fun onResponse(call: Call<GamesResponse>, response: Response<GamesResponse>) {
-                if (response.isSuccessful){
-                    //resultlist tüm verileri saklarrrr//altta result list add all vardı
-                    //**GameModel.addGameList(response.body()!!.results)
-                    GameModel.setTempGameList(response.body()!!.results)
-                    isLoading = false
-                    rvAdapter.notifyDataSetChanged()
+        try {
+            apiService.getGames(page = currentPage).enqueue(object : Callback<GamesResponse> {
+                override fun onResponse(
+                    call: Call<GamesResponse>,
+                    response: Response<GamesResponse>
+                ) {
+                    println("response.isSuccessful=" + response.isSuccessful)
+                    if (response.isSuccessful) {
+                        //resultlist tüm verileri saklarrrr//altta result list add all vardı
+                        //**GameModel.addGameList(response.body()!!.results)
+                        GameModel.setTempGameList(response.body()!!.results)
+                        isLoading = false
+                        println("response.isSuccessful")
+                        rvAdapter.setTempGameList(GameModel.getTempGameList())
+                        rvAdapter.notifyDataSetChanged()
 
-                    if (currentPage == TOTAL_PAGES){
-                        isLastPage = true
+                        if (currentPage == TOTAL_PAGES) {
+                            isLastPage = true
+                        }
+                    } else {
+                        println("response.isSuccessful = false")
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<GamesResponse>, t: Throwable) { t.printStackTrace() }
-        })
+                override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+        } catch ()
     }
+
 
 
 }

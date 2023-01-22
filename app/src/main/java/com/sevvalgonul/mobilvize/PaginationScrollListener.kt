@@ -3,6 +3,8 @@ package com.sevvalgonul.mobilvize
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
+
 abstract class PaginationScrollListener(private val layoutManager: LinearLayoutManager) :
     RecyclerView.OnScrollListener() {
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -10,10 +12,13 @@ abstract class PaginationScrollListener(private val layoutManager: LinearLayoutM
         val visibleItemCount = layoutManager.childCount
         val totalItemCount = layoutManager.itemCount
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+        println("onScrolled dx=" + dx + " dy=" + dy)
         if (!isLoading() && !isLastPage()) {
-            if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-                && firstVisibleItemPosition >= 0
-            ) {
+            val visibleCount = visibleItemCount + firstVisibleItemPosition
+            println("visibleCount=" + visibleCount + " totalItemCount=" + totalItemCount +
+                    " firstVisibleItemPosition=" + firstVisibleItemPosition )
+            if ((visibleCount >= totalItemCount)
+                && (firstVisibleItemPosition >= 0)) {
                 loadMoreItems()
             }
         }
