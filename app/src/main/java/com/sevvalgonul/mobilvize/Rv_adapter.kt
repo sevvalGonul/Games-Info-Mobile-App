@@ -64,7 +64,7 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
             return gameList.size
         }
 
-    fun setTempGameList(tempGameList: List<ResultGame>) {
+    fun setGameList(tempGameList: List<ResultGame>) {
         gameList = tempGameList
     }
 
