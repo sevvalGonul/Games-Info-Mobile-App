@@ -63,7 +63,7 @@ class DetailsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                println("Detail frag API Call on Failure")
             }
         })
 

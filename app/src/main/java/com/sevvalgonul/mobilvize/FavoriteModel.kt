@@ -114,5 +114,10 @@ class FavoriteModel {
 
             getFavoriIdList().remove(gameId)
         }
+
+        fun deleteFavoritedListByIndex(position: Int) {
+            getFavoriIdList().removeAt(position)
+            println("position at ="+ position + " silindi")
+        }
     }
 }

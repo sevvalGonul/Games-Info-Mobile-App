@@ -1,11 +1,14 @@
 package com.sevvalgonul.mobilvize
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sevvalgonul.mobilvize.databinding.FragmentFavouritesBinding
 
 class FavouritesFragment : Fragment() {
@@ -48,31 +51,24 @@ class FavouritesFragment : Fragment() {
         println("Favoriler açıldı")
 
         initRecyclerView(FavoriteModel.getFavoritedList())
+        //fav game list = FavoriteModel.getFavoritedList()
 
 
-        /*
-        binding.secTitle.text = "Favourites (${favList.size})"
-
-        myAdapter = Rv_adapter(gameList, false)
-        val recyclerView = binding.favRecyclerView
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = myAdapter
-        }
-
-        if(!(favList.isEmpty()))
-            binding.noFavHas.visibility = View.INVISIBLE
 
 
+    /**/
         val itemSwipe = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
+                println("onMove içinde")
                 return false
             }
+           /* */
 
+/* */
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {  // this method will be called when user swipe an item
                 showDialog(viewHolder)
             }
@@ -80,7 +76,7 @@ class FavouritesFragment : Fragment() {
         }
 
         val swap = ItemTouchHelper(itemSwipe)
-        swap.attachToRecyclerView(recyclerView)
+        swap.attachToRecyclerView(binding.favRecyclerView)
 
     }
 
@@ -88,36 +84,35 @@ class FavouritesFragment : Fragment() {
         val builder = AlertDialog.Builder(activity, R.style.MyAlertDialogStyle)
         builder.setTitle("Delete Item")
         builder.setMessage("Are you sure you want to delete item?")
+        /* */
         builder.setPositiveButton("YES") { dialog, which ->
             val position = viewHolder.adapterPosition
-            favList.removeAt(position)
-            myAdapter.notifyItemRemoved(position)
-            setFavCount(binding.secTitle)
+            FavoriteModel.deleteFavoritedListByIndex(position)
+            initRecyclerView(FavoriteModel.getFavoritedList())
+            //DELETE FROM FAV LİST YAPILDI AMA EFEKTİF DEĞİL
+            //VE FAVOURİTED YANINDAKİ SAYI GÜNCELLENİYOR
 
         }
+
         builder.setNegativeButton("NO") { dialog, which ->
             val position = viewHolder.adapterPosition
-            myAdapter.notifyItemChanged(position)
+            binding.favRecyclerView.adapter?.notifyItemChanged(position)
+            println("no position")
 
         }
+         /* */
         builder.setCancelable(false)  // prevent dialog from disappearing when user clicked somewhere else
         builder.show()
     }
 
-    private fun setFavCount(title : TextView) {
-        if (favList.size == 0){
-            title.setText("Favourites")
-            binding.noFavHas.visibility = View.VISIBLE
-        }else{
-            title.setText("Favourites (${favList.size})")
+/* */
 
-        }*/
-    }
 
     fun initRecyclerView(gameList : List<ResultGame>) {
 
         binding.favRecyclerView.layoutManager = LinearLayoutManager(binding.favRecyclerView.context)  // Context?
         binding.favRecyclerView.adapter = Rv_adapter(gameList, false)
+        binding.secTitle.text = "Favourites (" + FavoriteModel.getFavoritedList().size + ")"
 
     }
 
