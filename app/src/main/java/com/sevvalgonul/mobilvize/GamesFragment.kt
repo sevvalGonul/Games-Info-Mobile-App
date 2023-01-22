@@ -1,19 +1,15 @@
 package com.sevvalgonul.mobilvize
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevvalgonul.mobilvize.databinding.FragmentGamesBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class GamesFragment : Fragment() {
@@ -30,7 +26,7 @@ class GamesFragment : Fragment() {
     private val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     private lateinit var apiService: GamesApiService
 
-  override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
@@ -46,24 +42,25 @@ class GamesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.layoutManager = linearLayoutManager
-        binding.recyclerView.setHasFixedSize(true)
-        adapter = Rv_adapter(tempGameList,true)
-        binding.recyclerView.adapter = adapter
-        apiService = GamesApiService.getInstance()
+
+
+        initRecyclerView(tempGameList)
+        val apiService = GamesApiService.getInstance()
 
 
         /*var call = apiService.getGames()
+
         call.enqueue(object: Callback<GamesResponse> {
             override fun onResponse(call: Call<GamesResponse>, response: Response<GamesResponse>) {
                 if(response.code() == 200) {
                     var myResponse = response.body()
                     //print(myResponse)
                     //initRecyclerView(myResponse!!.results)
+
                 }
             }
             override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
-                print("sıçış")
+
             }
         })*/
 
@@ -73,24 +70,9 @@ class GamesFragment : Fragment() {
 
 
 
-        /*gameList = arrayListOf<Game>()
-        var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")
-        var game2 = Game(R.drawable.b,"Portal 2", 95, "Action, puzzle")
-        var game3 = Game(R.drawable.c,"The Witcher 3: Wild Hunt", 89, "Action, puzzle")
-        var game4 = Game(R.drawable.d,"Left 4 Dead 2", 89, "Action, puzzle")
-        gameList.add(game1)
-        gameList.add(game2)
-        gameList.add(game3)
-        gameList.add(game4)
+        /*
 
-        val layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.setHasFixedSize(true)
-        adapter = Rv_adapter(gameList, true)
-        binding.recyclerView.adapter = adapter
-
-
-        binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+       binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -124,12 +106,13 @@ class GamesFragment : Fragment() {
 
     }
 
-    /*fun initRecyclerView(gameList : List<ResultGame>) {
+    fun initRecyclerView(gameList : List<ResultGame>) {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)  // Context?
+        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = Rv_adapter(gameList, true)
 
-    }*/
+    }
 
     private fun loadNextPage() {
         apiService.getGames(page = currentPage).enqueue(object: Callback<GamesResponse>{

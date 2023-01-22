@@ -3,15 +3,12 @@ package com.sevvalgonul.mobilvize
 
 import android.graphics.Color
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -31,6 +28,7 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
             R.layout.game_item,
             parent, false
         )
+
         return GameViewHolder(itemView)
     }
 
@@ -44,18 +42,22 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
         Glide.with(holder.image.context).load(currentItem.background_image).into(holder.image)
 
 
-        if(details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+        //if (details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+            // Detay Ekrani GamesFragment'ten mi acildi, FavouritesFragment'ten mi Acildi Bilinmesi gerekiyor.
             holder.itemView.setOnClickListener {
                 val navController = Navigation.findNavController(it)
                 val bundle = Bundle()
                 //bundle.putParcelable("currentGame", currentItem)
                 bundle.putInt("gameId", currentItem.id)
-                navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
-
+                if (details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
+                    navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+                } else {
+                    navController!!.navigate(R.id.action_favouritesFragment_to_detailsFragment, bundle)
+                }
                 holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
             }
 
-        }
+       // }
     }
 
         override fun getItemCount(): Int {
