@@ -39,6 +39,22 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
         holder.metacritic.text = currentItem.metacritic.toString()
         val genreStr = currentItem.genres.map { it.name }
         holder.genre.text = genreStr.joinToString()
+
+        if(!GameModel.getClikedItemList().isEmpty()) {
+            println("currentItem.id=" + currentItem.id + " GameModel.isClikedItemList(currentItem.id)=" + GameModel.isClikedItemList(currentItem.id))
+            if (GameModel.isClikedItemList(currentItem.id) ) {//.containsle yapılabilir currentItem.id in
+                //game model isClickedItem e currentitem id gönderelim o kontrolü yapsın(contains kontrolü)
+                //true dönerse ife girer girerse rengi değişir
+                //clicked truedur
+                println("currentItem.id=" + currentItem.id + " holder.itemView.id=" + holder.itemView.id)
+                holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+            } else {
+                // RecycleView ayni indexte yeni sayfaya gecince yeni sayfadaki oyunun
+                // arkaplanini da boyadigi icin her seferinde arkaplan FFFFFF'e set ediliyor.
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            }
+        }
+
         Glide.with(holder.image.context).load(currentItem.background_image).into(holder.image)
 
 
@@ -51,10 +67,13 @@ class Rv_adapter(private var gameList : List<ResultGame>, private var details : 
                 bundle.putInt("gameId", currentItem.id)
                 if (details) {  // Rv_adapter GamesFragment'ta kullanılıyorsa DetailsFragment'a navigate edecek ve tıklanan objeyi gönderecek
                     navController!!.navigate(R.id.action_gamesFragment_to_detailsFragment, bundle)
+                    println("clicklendiii ID=" + currentItem.id)
+                    GameModel.addToClikedItemList(currentItem.id)
                 } else {
                     navController!!.navigate(R.id.action_favouritesFragment_to_detailsFragment, bundle)
                 }
-                holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
+
+                //holder.itemView.setBackgroundColor(Color.parseColor("#E0E0E0"))
             }
 
        // }

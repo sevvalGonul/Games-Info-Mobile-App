@@ -6,6 +6,7 @@ class GameModel {
 
     companion object {
 
+        private val clikedItemList: ArrayList<Int> = arrayListOf<Int>()
         private var searchList: List<ResultGame> = emptyList()
         private var allGameList: ArrayList<ResultGame> = arrayListOf<ResultGame>()
         //private var tempGameList: List<ResultGame> = emptyList()
@@ -43,7 +44,23 @@ class GameModel {
             searchList = results
         }
 
+        fun getClikedItemList(): ArrayList<Int> {
+            return clikedItemList
+        }
 
+        fun addToClikedItemList(id: Int) {
+            //listede daha önce var mı kontrolü
+            if(!isClikedItemList(id)) {
+                clikedItemList.add(id)
+            }
+        }
+
+        fun isClikedItemList(id: Int): Boolean {
+            //clikeditemlist.contains(id)
+            println("clikedItemList.contains(id)=" + clikedItemList.contains(id))
+            return clikedItemList.contains(id)
+
+        }
     }
 
 

@@ -16,7 +16,6 @@ import retrofit2.Response
 
 
 class GamesFragment : Fragment() {
-    private var ilkDefaCalisti: Boolean = false
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var apiService: GamesApiService
     private lateinit var binding : FragmentGamesBinding
@@ -144,7 +143,7 @@ class GamesFragment : Fragment() {
                 if (newText!!.length == (MIN_SEARCH_TEXT_LENGTH) ) {
 
                     //3ten az olunca geri games list gelir
-                    
+
                     addScrollListener()
                     rvAdapter.setGameList(GameModel.getGameList())
                     rvAdapter.notifyDataSetChanged()
@@ -157,9 +156,9 @@ class GamesFragment : Fragment() {
     }
 
     private fun ilkAcilistaCalistir() {
-        if (!ilkDefaCalisti) {
+        if (!SingleVar.isFirstRun()) {
             loadFirstPage()
-            ilkDefaCalisti = true
+            SingleVar.setFirstRun(true)
         }
     }
 
