@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Games(val gameList: ArrayList<Game>) : Parcelable
+data class Games(val gameList: ArrayList<Game1>) : Parcelable

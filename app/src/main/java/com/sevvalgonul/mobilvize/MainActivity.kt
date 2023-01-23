@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         }
         println("main.onCreate")
         // Favori ID Listesini Dosyadan Okuyacak.
-        FavoriteModel.getFavoriIdList()
+        FavoriteModel.getInstance(this.application)
+        //FavoriteModel.getFavoriIdList()
     }
 
     override fun finish() {

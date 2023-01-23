@@ -1,17 +1,16 @@
 package com.sevvalgonul.mobilvize
 
-import android.os.Parcelable
-
-import kotlinx.parcelize.Parcelize
-
-
-@Parcelize
-data class Game(var image: Int, var name: String, var rate: Int, var genre: String
-, var isFavourite: Boolean = false) : Parcelable {
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
-
-}
+@Entity(tableName = "favGameTable")
+data class Game(@PrimaryKey(autoGenerate = false) @ColumnInfo(name = "ID") var ID: Int? = null,
+                @ColumnInfo(name = "name") var name: String?,
+                @ColumnInfo(name = "background_image") var background_Image: String?,
+                @ColumnInfo(name = "metacritic") var metacritic: Int?
+)
 
 
 

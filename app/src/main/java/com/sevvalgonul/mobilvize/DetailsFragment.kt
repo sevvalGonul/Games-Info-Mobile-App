@@ -41,6 +41,7 @@ class DetailsFragment : Fragment() {
 
         val apiService = GamesApiService.getInstance()
         var call = apiService.getGamesDetail(args.gameId)
+
         println("args.gameId=$args.gameId")
         call.enqueue(object: Callback<DetailResponse> {
             override fun onResponse(
@@ -67,9 +68,6 @@ class DetailsFragment : Fragment() {
             }
         })
 
-
-
-
         binding.buttonReadMore.setOnClickListener{  //ON CLICK READ MORE BUTTON LOADS 4 MORE LINES EACH TIME
             binding.textView.maxLines+=4
         }
@@ -88,6 +86,8 @@ class DetailsFragment : Fragment() {
 
                  */
                 FavoriteModel.addFavoritedList(args.gameId)
+
+                FavoriteModel.insertFavoriGame(getGameItem(args.gameId));
 /*                if (args.currentGame.isFavourite == false){  //IF NOT ADDED TO FAVS BEFORE ADD TO FAV
                     args.currentGame.isFavourite = true
                 }*/
@@ -123,5 +123,19 @@ class DetailsFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun getGameItem(gameId: Int): Game? {
+/*
+        val id: Int? = null,
+        val name: String,
+        val background_image: String,
+        val metacritic: Int?,
+        val genres : List<GenreNames>
+*/
+        var resultGame : ResultGame? = GameModel.getGameWitdID(gameId)
+        var game = Game(resultGame?.id, resultGame?.name, resultGame?.background_image, resultGame?.metacritic )
+
+        return game
     }
 }

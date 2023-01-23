@@ -1,15 +1,22 @@
 package com.sevvalgonul.mobilvize
 
+import android.app.Application
 import android.os.Environment
 import java.io.File
 import java.util.*
 
 class FavoriteModel {
+
     companion object {
+
+        private var repository: GameRepository? = null
+        private lateinit var myApp: Application
+
         //private lateinit var gameList: List<ResultGame>
         var favList: ArrayList<ResultGame> = arrayListOf<ResultGame>()
         private var myFile : File? = null
         var favGameIdList : ArrayList<Int> = arrayListOf<Int>()
+
 
         fun getFavoritesFile() : File {
             var name = "/Documents/Favoriler.txt"
@@ -29,6 +36,7 @@ class FavoriteModel {
             // Favori dosyasindaki butun numaralari oku.
             val gameIdList : ArrayList<Int>  = getFavoriIdList()
             var gameExist : Int? = gameIdList.find { oyunId -> oyunId.equals(gameId) }
+            // var gameExist : Int? = GameModel.getGameWitdID(gameId)
             println("gameExist = " + gameExist)
             println()
             // Numaralari gameId ile karsilastir, var ise true don.
@@ -65,14 +73,6 @@ class FavoriteModel {
                 getFavoriIdList().add(gameId)
             }
         }
-/*
-        fun setGameList(results: List<ResultGame>) {
-            gameList = results
-        }
-
-        fun getGameList(): List<ResultGame> {
-            return gameList
-        }*/
 
         fun getFavoritedList(): List<ResultGame> {
             //favlistteki id olan oyunları gamelşstte bulup saklayacak
@@ -84,23 +84,16 @@ class FavoriteModel {
 
             val tempGameList = GameModel.getGameList()
             println("tempGameList.size=" + tempGameList.size + "favList.size=" + favList.size )
-            for (eachGame in tempGameList) {
+            for (eachFavId in favGameIdList){
+                for (eachGame in tempGameList) {
 
-                for (eachFavId in favGameIdList){
-                    println("eachGame.id= " + eachGame.id + " eachFavId= " + eachFavId)
+                    // println("eachGame.id= " + eachGame.id + " eachFavId= " + eachFavId)
 
                     if ( eachFavId == eachGame.id ){
                         favList.add(eachGame)
                     }
-
-
                 }
-
-
             }
-            //gameList.forEach(resultGame -> favGameIdLi )
-
-            //gameList.get(1).id
 
             return favList.toList()
         }
@@ -122,6 +115,19 @@ class FavoriteModel {
             println("position at ="+ position + " silindi favList.id-name=" + favID + "-" + favList.get(position).name)
             //getFavoriIdList().removeAt(position)
             getFavoriIdList().remove(favID)
+        }
+
+        fun getInstance(app: Application) {
+            if (repository == null) {
+                repository = GameRepository(app)
+                getFavoriIdList()
+            }
+        }
+
+        fun insertFavoriGame(game: Game?) {
+            if (game != null) {
+                repository?.insert(game)
+            }
         }
     }
 }

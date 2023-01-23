@@ -61,6 +61,12 @@ class GameModel {
             return clikedItemList.contains(id)
 
         }
+
+        fun getGameWitdID(gameId: Int): ResultGame? {
+            var game = allGameList.find { oyun -> oyun.id == gameId }
+            println("getGameWitdID")
+            return game
+        }
     }
 
 
