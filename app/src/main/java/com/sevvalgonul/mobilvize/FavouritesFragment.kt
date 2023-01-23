@@ -51,6 +51,8 @@ class FavouritesFragment : Fragment() {
         println("Favoriler açıldı")
 
         initRecyclerView(FavoriteModel.getFavoritedList())
+
+
         //fav game list = FavoriteModel.getFavoritedList()
 
 
@@ -114,6 +116,7 @@ class FavouritesFragment : Fragment() {
         binding.favRecyclerView.layoutManager = LinearLayoutManager(binding.favRecyclerView.context)  // Context?
         binding.favRecyclerView.adapter = Rv_adapter(gameList, false)
         binding.secTitle.text = "Favourites (" + FavoriteModel.getFavoritedList().size + ")"
+
 
     }
 

@@ -135,7 +135,6 @@ class DetailsFragment : Fragment() {
 */
         var resultGame : ResultGame? = GameModel.getGameWitdID(gameId)
         var game = Game(resultGame?.id, resultGame?.name, resultGame?.background_image, resultGame?.metacritic )
-
         return game
     }
 }

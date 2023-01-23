@@ -9,7 +9,6 @@ class GameModel {
         private val clikedItemList: ArrayList<Int> = arrayListOf<Int>()
         private var searchList: List<ResultGame> = emptyList()
         private var allGameList: ArrayList<ResultGame> = arrayListOf<ResultGame>()
-        //private var tempGameList: List<ResultGame> = emptyList()
 
 
         fun addGameList(results: ArrayList<ResultGame>) {
@@ -23,18 +22,6 @@ class GameModel {
         fun getGameList() : ArrayList<ResultGame> {
             return allGameList
         }
-
-        /*fun addTempGameList(results: List<ResultGame>) {
-            tempGameList.addAll(results)
-        }
-
-        fun setTempGameList(results: List<ResultGame>) {
-            tempGameList = results
-        }
-
-        fun getTempGameList() : List<ResultGame> {
-            return tempGameList
-        }*/
 
         fun getSearchList(): List<ResultGame> {
             return searchList

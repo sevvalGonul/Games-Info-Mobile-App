@@ -21,8 +21,7 @@ abstract class FavGameDatabase : RoomDatabase() {
         fun getInstance(ctx: Context): FavGameDatabase {
             if(instance == null)
                 instance = Room.databaseBuilder(ctx.applicationContext, FavGameDatabase::class.java,
-                    "favGameTable")
-                    .build()
+                    "favGameTable").allowMainThreadQueries().build()
 
             return instance!!
 

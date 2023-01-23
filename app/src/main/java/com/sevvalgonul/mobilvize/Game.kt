@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
 data class Game(@PrimaryKey(autoGenerate = false) @ColumnInfo(name = "ID") var ID: Int? = null,
                 @ColumnInfo(name = "name") var name: String?,
                 @ColumnInfo(name = "background_image") var background_Image: String?,
-                @ColumnInfo(name = "metacritic") var metacritic: Int?
+                @ColumnInfo(name = "metacritic") var metacritic: Int?,
+                //@ColumnInfo(name = "genres") var genres: List<GenreNames?>?
 )
 
 

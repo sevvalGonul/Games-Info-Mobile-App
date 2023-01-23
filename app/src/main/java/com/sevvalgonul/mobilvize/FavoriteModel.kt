@@ -127,6 +127,7 @@ class FavoriteModel {
         fun insertFavoriGame(game: Game?) {
             if (game != null) {
                 repository?.insert(game)
+                println("insertFavoriGame done = " + game.ID.toString() + "-" + game.name)
             }
         }
     }
