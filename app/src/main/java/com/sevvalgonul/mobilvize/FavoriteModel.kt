@@ -82,7 +82,8 @@ class FavoriteModel {
 
             favList.clear()
 
-            val tempGameList = GameModel.getTempGameList()
+            val tempGameList = GameModel.getGameList()
+            println("tempGameList.size=" + tempGameList.size + "favList.size=" + favList.size )
             for (eachGame in tempGameList) {
 
                 for (eachFavId in favGameIdList){

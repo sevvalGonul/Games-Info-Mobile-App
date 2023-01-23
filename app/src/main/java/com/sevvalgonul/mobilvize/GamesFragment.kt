@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevvalgonul.mobilvize.databinding.FragmentGamesBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+
 
 
 class GamesFragment : Fragment() {
@@ -19,6 +22,7 @@ class GamesFragment : Fragment() {
     private lateinit var rvAdapter : Rv_adapter
     private val PAGE_START = 1
     private val TOTAL_PAGES = 20
+    private val MIN_SEARCH_TEXT_LENGTH = 3
     private var currentPage = PAGE_START
     //private var linearLayoutManager
     private var isLoading = false
@@ -43,7 +47,7 @@ class GamesFragment : Fragment() {
         println("gameFragment onViewCreated")
         apiService = GamesApiService.getInstance()
 
-        initRecyclerView(GameModel.getTempGameList())
+        initRecyclerView(GameModel.getGameList())
 
 
         /*
@@ -64,30 +68,11 @@ class GamesFragment : Fragment() {
         })
 
 */
-
         addScrollListener()
-        loadFirstPage()
-        //initListeners(rvAdapter)
+        ilkAcilistaCalistir()
+        initSearchListeners(rvAdapter)
 
-
-
-        /*gameList = arrayListOf<Game>()
-        var game1 = Game(R.drawable.a,"Grand Theft Auto V", 96, "Action, shooter")
-        var game2 = Game(R.drawable.b,"Portal 2", 95, "Action, puzzle")
-        var game3 = Game(R.drawable.c,"The Witcher 3: Wild Hunt", 89, "Action, puzzle")
-        var game4 = Game(R.drawable.d,"Left 4 Dead 2", 89, "Action, puzzle")
-        gameList.add(game1)
-        gameList.add(game2)
-        gameList.add(game3)
-        gameList.add(game4)
-
-        val layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.setHasFixedSize(true)
-        adapter = Rv_adapter(gameList, true)
-        binding.recyclerView.adapter = adapter
-
-
+/*
         binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -122,6 +107,61 @@ class GamesFragment : Fragment() {
 
     }
 
+    private fun initSearchListeners(rvAdapter: Rv_adapter) {
+        binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                println("initSearchListeners.onQueryTextSubmit")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                println("initSearchListeners.onQueryTextChange newTextlength=" + newText!!.length)
+                if (newText!!.length > MIN_SEARCH_TEXT_LENGTH) {
+                    val searchText = newText!!.lowercase()
+                    apiService.search(searchText).enqueue(object : Callback<GamesResponse> {
+                        override fun onResponse(
+                            call: Call<GamesResponse>,
+                            response: Response<GamesResponse>
+                        ) {  // update the tempGameList in order to show search results in recyclerView
+                            binding.recyclerView.clearOnScrollListeners()
+                            /*
+                            tempGameList.clear()
+                            tempGameList.addAll(response.body()!!.results.toMutableList())*/
+                            GameModel.setSearchList(response.body()!!.results)
+
+                            rvAdapter.setGameList(GameModel.getSearchList())
+                            rvAdapter.notifyDataSetChanged()
+                        }
+
+                        override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
+                            println("onQueryTextChange  onFailure")
+                        }
+
+                    })
+                }
+
+                if (newText!!.length == (MIN_SEARCH_TEXT_LENGTH) ) {
+
+                    //3ten az olunca geri games list gelir
+
+                    addScrollListener()
+                    rvAdapter.setGameList(GameModel.getGameList())
+                    rvAdapter.notifyDataSetChanged()
+
+                }
+
+                return true
+            }
+        })
+    }
+
+    private fun ilkAcilistaCalistir() {
+        if (!SingleVar.isFirstRun()) {
+            loadFirstPage()
+            SingleVar.setFirstRun(true)
+        }
+    }
+
     fun initRecyclerView(gameList : List<ResultGame>) {
         //linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         linearLayoutManager = LinearLayoutManager(binding.recyclerView.context, LinearLayoutManager.VERTICAL, false)
@@ -142,7 +182,12 @@ class GamesFragment : Fragment() {
                 isLoading = true
                 currentPage += 1
                 println("addScrollListener.loadMoreItems currentPage=" + currentPage)
-                loadNextPage()
+                try {
+                    loadNextPage()
+                } catch (ex: Exception) {
+                    println("loadMoreItems ex: Exception=")
+                    isLoading = false
+                }
             }
 
             override fun isLastPage(): Boolean {
@@ -158,22 +203,31 @@ class GamesFragment : Fragment() {
     }
 
     private fun loadFirstPage() {
+        try {
         apiService.getGames().enqueue(object: Callback<GamesResponse>{
             override fun onResponse(call: Call<GamesResponse>, response: Response<GamesResponse>) {
                 if (response.isSuccessful){
                     //resultList.addAll(response.body()!!.results.toMutableList())
                     //tempGameList.addAll(response.body()!!.results.toMutableList())
                     //**GameModel.addGameList(response.body()!!.results)
-                    GameModel.setTempGameList(response.body()!!.results)
+                    GameModel.addGameList(response.body()!!.results as ArrayList<ResultGame>)
                     //initRecyclerView(GameModel.getTempGameList())
-                    rvAdapter.setTempGameList(GameModel.getTempGameList())
+                    rvAdapter.setGameList(GameModel.getGameList())
                     rvAdapter.notifyDataSetChanged()
                     println("loadFirstPage ")
                 }
             }
 
-            override fun onFailure(call: Call<GamesResponse>, t: Throwable) { t.printStackTrace() }
+            override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
+                println("loadFirstPage onFailure" )
+//                isLoading = false
+                t.printStackTrace()
+            }
         })
+        } catch (ex: Exception) {
+            println("loadNextPage ex: Exception=" )
+//            isLoading = false
+        }
     }
 
     private fun loadNextPage() {
@@ -187,10 +241,10 @@ class GamesFragment : Fragment() {
                     if (response.isSuccessful) {
                         //resultlist tüm verileri saklarrrr//altta result list add all vardı
                         //**GameModel.addGameList(response.body()!!.results)
-                        GameModel.setTempGameList(response.body()!!.results)
+                        GameModel.addGameList(response.body()!!.results as ArrayList<ResultGame>)
                         isLoading = false
                         println("response.isSuccessful")
-                        rvAdapter.setTempGameList(GameModel.getTempGameList())
+                        rvAdapter.setGameList(GameModel.getGameList())
                         rvAdapter.notifyDataSetChanged()
 
                         if (currentPage == TOTAL_PAGES) {
@@ -202,10 +256,15 @@ class GamesFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<GamesResponse>, t: Throwable) {
+                    println("loadNextPage onFailure")
+                    isLoading = false
                     t.printStackTrace()
                 }
             })
-        } catch ()
+        } catch (ex: Exception) {
+            println("loadNextPage ex: Exception=" )
+            isLoading = false
+        }
     }
 
 

@@ -8,5 +8,5 @@ data class ResultGame (
     val name: String,
     val background_image: String,
     val metacritic: Int?,
-    val genres : List<GenreNames>
+    val genres : List<GenreNames>,
 )
