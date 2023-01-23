@@ -108,7 +108,6 @@
         android:layout_marginEnd="69dp"
         android:gravity="center"
         android:lineSpacingExtra="20sp"
-        android:text="@string/no_game_has"
         android:textAppearance="@style/text_style_1"
         android:translationY="-9.76sp"
         app:layout_constraintBottom_toBottomOf="parent"
