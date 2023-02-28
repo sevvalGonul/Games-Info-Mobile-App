@@ -55,7 +55,6 @@ class FavouritesFragment : Fragment() {
 
 
 
-
     /**/
         val itemSwipe = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -90,6 +89,7 @@ class FavouritesFragment : Fragment() {
             FavoriteModel.deleteFavoritedListByIndex(position)
             println("position = " + position)
             initRecyclerView(FavoriteModel.getFavoritedList())
+
             //DELETE FROM FAV LİST YAPILDI AMA EFEKTİF DEĞİL
             //VE FAVOURİTED YANINDAKİ SAYI GÜNCELLENİYOR
 
@@ -98,6 +98,8 @@ class FavouritesFragment : Fragment() {
         builder.setNegativeButton("NO") { dialog, which ->
             val position = viewHolder.adapterPosition
             binding.favRecyclerView.adapter?.notifyItemChanged(position)
+
+
             println("no position")
 
         }
@@ -111,10 +113,19 @@ class FavouritesFragment : Fragment() {
 
     fun initRecyclerView(gameList : List<ResultGame>) {
 
-        binding.favRecyclerView.layoutManager = LinearLayoutManager(binding.favRecyclerView.context)  // Context?
+        binding.favRecyclerView.layoutManager =
+            LinearLayoutManager(binding.favRecyclerView.context)  // Context?
         binding.favRecyclerView.adapter = Rv_adapter(gameList, false)
         binding.secTitle.text = "Favourites (" + FavoriteModel.getFavoritedList().size + ")"
 
-    }
+        if (FavoriteModel.getFavoritedList().isNotEmpty()) {
+            binding.noFavHas.visibility = View.INVISIBLE
+        }
+        else{
+            binding.noFavHas.visibility = View.VISIBLE
+        }
 
+
+
+    }
 }

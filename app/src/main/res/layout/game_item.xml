@@ -88,8 +88,8 @@
         <!-- GAMES GENRE -->
         <TextView
             android:id="@+id/game_detail"
-            android:layout_width="110dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/game_type_detail_str"
             android:textAlignment="textStart"
             android:textAppearance="@style/genre"
